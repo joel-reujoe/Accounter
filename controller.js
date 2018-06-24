@@ -30,7 +30,7 @@ app.use(function (req, res, next) {
 var path=require('path');
 app.get('/viewPage.html', (req, res) => {
     console.log(req.query);
-    res.sendFile(path.join(__dirname+'pages/html/viewPage.html'));
+    res.sendFile(path.join(__dirname+'/pages/html/viewPage.html'));
 });
 var port=process.env.PORT || 8000
 app.use('/controller/ctrl-account', router_account);
