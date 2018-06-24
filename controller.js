@@ -11,9 +11,9 @@ var path = require('path');
 var express = require('express');
 var sql = require('mysql');
 var bodyParser = require('body-parser');
-const Master_Functions1 = require('./dependencies/masterfunctions.js');
-var dbservice = require('./dependencies/db.js');
-var router_account = require('./routers/router_account.js');
+const Master_Functions1 = require('./functions/lib/dependencies/masterfunctions.js');
+var dbservice = require('./functions/lib/dependencies/db.js');
+var router_account = require('./functions/lib/routers/router_account.js');
 var app = express();
 app.use(bodyParser());
 app.use(function (req, res, next) {
