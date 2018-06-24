@@ -61,7 +61,11 @@
 <script>
     $(document).ready( function() {
     $("#addR").on("click", function() {
-        $("#content").load("http://accounter-md1.herokuapp.com/pages/html/addResident.html");
+        axios.get(`${globalpath}addResident`).then(function(response){
+            console.log(response);
+        }).catch(function(error){
+            console.log(error);
+        })
     });
 });
 $(document).ready( function() {

@@ -28,6 +28,10 @@ app.use(function (req, res, next) {
 //     });
 // });
 var path=require('path');
+app.get('/addResident', (req, res) => {
+    console.log(req.query);
+    res.sendFile(path.join(__dirname+'/pages/html/addResident.html'));
+});
 app.get('/main.html', (req, res) => {
     console.log(req.query);
     res.sendFile(path.join(__dirname+'/pages/html/main.html'));
