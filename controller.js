@@ -20,13 +20,13 @@ app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
 });
-app.use(function (req, res, next) {
-    return __awaiter(this, void 0, void 0, function* () {
-        var service = yield new dbservice();
-        req.connection = yield service.connectdb();
-        next();
-    });
-});
+// app.use(function (req, res, next) {
+//     return __awaiter(this, void 0, void 0, function* () {
+//         var service = yield new dbservice();
+//         req.connection = yield service.connectdb();
+//         next();
+//     });
+// });
 
 app.get('/', (req, res) => {
     console.log(req.query);
