@@ -11,7 +11,7 @@ var sql = require('mysql');
 //35.200.167.245
 class dbconnect {
     constructor() {
-        this.host = 'https://accounter-md1.herokuapp.com/';
+        this.host = 'localhost';
         this.user = `root`;
         this.password = ``;
         this.database = `society_job`;
@@ -55,10 +55,30 @@ class dbconnect {
     }
 }
 const services = {
+    connectdb: () => __awaiter(this, void 0, void 0, function* () {
+        return new Promise(function (resolve, reject) {
+            var connection = sql.createConnection({
+                host: "35.193.249.1",
+                user: "istatsuser",
+                password: "istatstest123",
+                database: "atomvmnn_istats_db"
+            });
+            connection.connect((err) => {
+                if (err) {
+                    reject(err);
+                    console.error('error connecting: ' + err.stack);
+                }
+                else {
+                    resolve(connection);
+                    console.log('connected as id ' + connection.threadId);
+                }
+            });
+        });
+    }),
     connectdb_name: (dbname) => __awaiter(this, void 0, void 0, function* () {
         return new Promise(function (resolve, reject) {
             var connection = sql.createConnection({
-                host: "https://accounter-md1.herokuapp.com/",
+                host: "localhost",
                 user: "root",
                 password: "",
                 database: dbname

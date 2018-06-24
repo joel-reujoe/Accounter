@@ -68,8 +68,8 @@ app.use('/urlparser', (req, res, next) => __awaiter(this, void 0, void 0, functi
     });
 }));
 
-app.post('/', (req, res) => {
-    console.log(req.body);
+app.get('/', (req, res) => {
+    console.log(req.query);
     res.send('hi');
 });
 var port=process.env.PORT || 8000
