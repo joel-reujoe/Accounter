@@ -21,7 +21,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    "start": "nodemon controller.js"
+    "start": "node controller.js"
   },
   "author": "",
   "license": "ISC",
