@@ -11,7 +11,7 @@ var sql = require('mysql');
 //35.200.167.245
 class dbconnect {
     constructor() {
-        this.host = 'localhost';
+        this.host = '54.172.87.254:443';
         this.user = `root`;
         this.password = ``;
         this.database = `society_job`;
