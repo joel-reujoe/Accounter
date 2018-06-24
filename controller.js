@@ -28,7 +28,7 @@ app.use(function (req, res, next) {
 //     });
 // });
 
-app.get('/', (req, res) => {
+app.post('/', (req, res) => {
     console.log(req.query);
     res.send('hi');
 });
