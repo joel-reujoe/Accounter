@@ -73,7 +73,7 @@ app.post('/', (req, res) => {
     res.send('hi');
 });
 app.use('/controller/ctrl-account', router_account);
-app.listen(8000, () => {
+app.listen(8080, () => {
     console.log("Server Started at 8000");
 });
 //# sourceMappingURL=controller.js.map

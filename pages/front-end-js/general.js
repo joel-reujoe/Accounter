@@ -1,1 +1,1 @@
-var globalpath="http://localhost:8000/"
+var globalpath="  https://accounter-md1.herokuapp.com/"
