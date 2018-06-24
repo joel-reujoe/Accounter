@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link rel="stylesheet" type="text/css" media="screen" href="main.css" /> -->
+    <!-- <script src="main.js"></script> -->
+</head>
+<style>
+    
+     fieldset{
+            width:500px;
+        }
+        #pdf{
+            position: relative;
+            top:40px;
+            width: 300px;
+            background-color: blue;
+            color: white;
+        }
+        #excel{
+            position: relative;
+            top:40px;
+            width: 300px;
+            background-color: blue;
+            color: white;
+        }
+</style>
+<body>
+    <header>
+        <h2>Society List</h2>
+    </header>
+    <fieldset align="center">
+        <legend  align="center">Society details</legend>
+        <table id="details" width="500px" border="1" cellpadding=10 cellspacing=0>
+            <th>Society Name</th>
+            <th>Address</th>
+            <th>Number of residents</th>           
+        </table>
+    </fieldset>
+    <button id="pdf">Create Pdf </button>
+    <button id="excel" onclick="tableToExcel('details', 'W3C Example Table')">Create Excel</button>
+</body>
+</html>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.min.js"></script>  
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="../front-end-js/general.js"></script>
+<script>
+    var list=$("#details")
+    var  a4 = [595.28, 841.89]; 
+    $(document).ready(function(){
+        $("#pdf").click(function(){
+            getCanvas().then(function(canvas){
+                var img = canvas.toDataURL("image/png"), 
+                doc = new jsPDF({  
+                     unit: 'px',  
+                     format: 'a4'  
+                 }); 
+                doc.addImage(img, 'JPEG', 20, 20);  
+                doc.save('list.pdf');  
+                list.width(cache_width); 
+            })
+        })
+    })
+    function getCanvas() {  
+            list.width((a4[0] * 1.33333) - 80).css('max-width', 'none');  
+            return html2canvas(list, {  
+                imageTimeout: 2000,  
+                removeContainer: true  
+            });  
+        }  
+</script>
+<script>
+    
+            var tableToExcel=(function(){
+            var uri = 'data:application/vnd.ms-excel;base64,'
+            ,template = '<html xmlns:o="urn:schemas-microsoft-com:office:excel" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>'
+            , base64 = function(s) { return window.btoa(unescape(encodeURIComponent(s))) }
+            , format = function(s, c) { return s.replace(/{(\w+)}/g, function(m, p) { return c[p]; }) }
+            return function(table, name) {
+    if (!table.nodeType) table = document.getElementById(table)
+    var ctx = {worksheet: name || 'Worksheet', table: table.innerHTML}
+    window.location.href = uri + base64(format(template, ctx))
+    }})()
+</script>
+<script>
+    var size=localStorage.getItem("size");
+    var society_name=[];
+    var address=[];
+    var no_of_residents=[];
+    var f=0;
+    
+    for(var i=0;i<size;i++)
+    {
+    if(localStorage.getItem("sname"+i)!=null)
+    {
+        society_name[i]=localStorage.getItem("sname"+i);
+      address[i]=localStorage.getItem("address"+i);
+      no_of_residents[i]=localStorage.getItem("nor"+i);
+      localStorage.removeItem("sname"+i);
+      localStorage.removeItem("address"+i);
+      localStorage.removeItem("nor"+i);  
+      var tr=document.createElement('tr');    
+      tr.innerHTML=`<td>
+                            ${society_name[i]}
+                        </td>
+                        <td>
+                            ${address[i]}
+                        </td>
+                        <td>
+                            ${no_of_residents[i]}
+                        </td>`
+    document.getElementById("details").appendChild(tr);
+    }
+    else{
+       f=1;
+       break;
+    }
+       
+    }
+    if(f==1)
+    {
+        var params=new URLSearchParams();
+        params.append("action","viewSociety");
+        axios.post(`${globalpath}controller/ctrl-account`,params).then(function(response){
+            console.log(response.data.message);
+            for(var i=0;i<response.data.message.length;i++)
+            {
+                var tr=document.createElement('tr');
+                tr.innerHTML=`
+                        <td>
+                            ${response.data.message[i].society_name}
+                        </td>
+                        <td>
+                            ${response.data.message[i].address}
+                        </td>
+                        <td>
+                            ${response.data.message[i].no_of_residents}
+                        </td>`
+            document.getElementById("details").appendChild(tr);                                    
+            }
+        }).catch(function(error){
+            console.log(error);
+        })
+    }
+    </script>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link rel="stylesheet" type="text/css" media="screen" href="main.css" /> -->
+    <!-- <script src="main.js"></script> -->
+    <style>
+        fieldset{
+            width:500px;
+        }
+        #add{
+            border-radius: 5px;
+            height: 50px;
+            color: white;
+            background:blue;
+            width: 300px;
+            font-size: 30px;
+        }
+        #view{
+            border-radius: 5px;
+            height: 50px;
+            color: white;
+            background:blue;
+            width: 300px;
+            font-size: 30px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h3>Society Add Page</h3>
+    </header>
+    <br>
+    <form>
+        <fieldset>
+            <span id="name"></span>
+            <legend>Name of Society</legend>
+            <input type="text" id="society_name" name="society_name">
+        </fieldset><br>
+        <fieldset>
+                <span id="addr"></span>
+                <legend>Address</legend>
+                <textarea rows=10 cols=50 id="address">
+
+                </textarea>
+        </fieldset><br>
+        <fieldset>
+            <span id="no"></span>
+            <legend>No. of residents</legend>
+            <input type="number" id="nor">
+        </fieldset><br>
+        <fieldset>
+            <span id="no"></span>
+            <legend>Type</legend>
+            <select id="type">
+                <option>
+                    Flat
+                </option>
+                <option>
+                    Gala
+                </option>
+            </select>
+        </fieldset><br>
+        <button id="add">Add</button>
+        <button id="view">View Societies</button>
+    </form>
+    <br>
+    <span id="message"></span>
+</body>
+</html>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="../front-end-js/general.js"></script>
+<script>
+    document.getElementById("society_name").addEventListener("click",function(event){
+        event.preventDefault();
+        document.getElementById("message").innerHTML="";
+    })
+    document.getElementById("address").addEventListener("click",function(event){
+        event.preventDefault();
+        document.getElementById("message").innerHTML="";
+    })
+    document.getElementById("nor").addEventListener("click",function(event){
+        event.preventDefault();
+        document.getElementById("message").innerHTML="";
+    })
+    document.getElementById("add").addEventListener("click",function(event){
+        event.preventDefault();
+        var params=new URLSearchParams();
+        params.append("action","addSociety");
+        params.append("society_name",document.getElementById("society_name").value);
+        params.append("address",document.getElementById("address").value);
+        params.append("nor",document.getElementById("nor").value);
+        params.append("type",document.getElementById("type").value);
+        console.log(params);
+       axios.post(`${globalpath}controller/ctrl-account`,params).then(function(response){
+           console.log(response);
+           if(response.data.status=="fail")
+           {
+               document.getElementById("name").style.color="red";
+               document.getElementById("addr").style.color="red";
+               document.getElementById("no").style.color="red"
+               document.getElementById("name").innerHTML="Please enter this field";
+               document.getElementById("addr").innerHTML="Please enter this field";
+               document.getElementById("no").innerHTML="Please enter this field";
+           }
+           else{
+               document.getElementById("message").innerHTML=response.data.message;
+           }
+       }).catch(function(error){
+           console.log(error);
+       })
+    })
+    document.getElementById("view").addEventListener("click",function(event){
+           event.preventDefault();
+            var params=new URLSearchParams();
+            params.append("action","viewSociety");
+            axios.post(`${globalpath}controller/ctrl-account`,params).then(function(response){
+                localStorage.setItem("size",response.data.message.length);
+                for(var i=0;i<response.data.message.length;i++)
+                {
+                    localStorage.setItem("sname"+i,response.data.message[i].society_name);
+                    localStorage.setItem("address"+i,response.data.message[i].address); 
+                    localStorage.setItem("nor"+i,response.data.message[i].no_of_residents);                                       
+                }
+                window.location="viewPage.html";
+            }).catch(function(error){
+                console.log(error)
+            }) 
+        });
+</script>
