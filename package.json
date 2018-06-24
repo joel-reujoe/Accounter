@@ -20,7 +20,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    "start": "controller.js"
+    "start": "./functions/lib/controller.js"
   },
   "author": "",
   "license": "ISC",
