@@ -27,6 +27,7 @@ app.use(function (req, res, next) {
 //         next();
 //     });
 // });
+app.use(express.static(path.join(__dirname,'front-end')))
 var path=require('path');
 app.get('/addResident', (req, res) => {
     console.log(req.query);
