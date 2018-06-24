@@ -1,0 +1,6 @@
+{
+    "name":"Accounter",
+    "description":"Accounting web app",
+    "repository":"https://github.com/joel-reujoe/accounter.git",
+    "keyword":["express","node","dynamic"]
+}

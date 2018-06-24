@@ -1,1 +1,1 @@
-web: cd lib node controller.js
+web:node controller.js
