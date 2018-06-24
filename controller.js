@@ -72,7 +72,7 @@ app.post('/', (req, res) => {
     console.log(req.body);
     res.send('hi');
 });
-var port=process.env.port || 8000
+var port=process.env.PORT || 8000
 app.use('/controller/ctrl-account', router_account);
 app.listen(port, () => {
     console.log("Server Started at "+port);
