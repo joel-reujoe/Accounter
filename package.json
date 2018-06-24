@@ -19,6 +19,9 @@
     "url": "https://github.com/joel-reujoe/accounter.git"
   },
   "devDependencies": {},
+  "scripts": {
+    "start": "controller.js"
+  },
   "author": "",
   "license": "ISC",
   "keywords": [
