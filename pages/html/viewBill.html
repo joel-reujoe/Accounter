@@ -260,7 +260,7 @@
     var params=new URLSearchParams();
     params.append("action","viewBill");
     params.append("resident",resident_name);
-    axios.post(`${globalpath}controller/ctrl-account`,params).then(function(response){
+    axios.post(`${globalpath}`,params).then(function(response){
         document.getElementById("society_name").innerHTML=response.data.data.result1[0].society_name;
         document.getElementById("sign").innerHTML=response.data.data.result1[0].society_name;        
         document.getElementById("address").innerHTML=response.data.data.result1[0].Address;

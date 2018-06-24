@@ -72,8 +72,9 @@ app.post('/', (req, res) => {
     console.log(req.body);
     res.send('hi');
 });
+var port=process.env.port || 8000
 app.use('/controller/ctrl-account', router_account);
-app.listen(8080, () => {
+app.listen(port, () => {
     console.log("Server Started at 8000");
 });
 //# sourceMappingURL=controller.js.map
