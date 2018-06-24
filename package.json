@@ -2,7 +2,7 @@
   "name": "functions",
   "version": "1.0.0",
   "description": "",
-  "main": "main.js",
+  "main": "controller.js",
   "directories": {
     "lib": "lib"
   },
@@ -19,6 +19,9 @@
     "url": "https://github.com/joel-reujoe/accounter.git"
   },
   "devDependencies": {},
+  "scripts": {
+    "start": "nodemon"
+  },
   "author": "",
   "license": "ISC",
   "keywords": [
