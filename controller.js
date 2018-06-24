@@ -67,6 +67,10 @@ app.use('/urlparser', (req, res, next) => __awaiter(this, void 0, void 0, functi
         }
     });
 }));
+app.get('/', (req, res) => {
+    console.log(req.body);
+    res.send('hi');
+});
 app.post('/', (req, res) => {
     console.log(req.body);
     res.send('hi');
