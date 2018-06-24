@@ -27,10 +27,10 @@ app.use(function (req, res, next) {
 //         next();
 //     });
 // });
-
-app.post('/', (req, res) => {
+var path=require('path');
+app.get('/viewPage.html', (req, res) => {
     console.log(req.query);
-    res.send('hi');
+    res.sendFile(path.join(__dirname+'pages/html/viewPage.html'));
 });
 var port=process.env.PORT || 8000
 app.use('/controller/ctrl-account', router_account);
