@@ -4,6 +4,7 @@ const client = new Client({
     connectionString: process.env.DATABASE_URL,
     ssl: true,
   });
+
 interface mysqlConnection{
     host:string,
     user:string,
