@@ -28,11 +28,8 @@ app.use(function (req, res, next) {
     });
 });
 app.get('/', (req, res) => {
-    dbservice.query('CREATE TABLE bill_details (bill_id int(11) NOT NULL,service_charge int(11) NOT NULL,water_charge int(11) NOT NULL,sinking_fund int(11) NOT NULL,repair_fund int(11) NOT NULL,other_expense int(11) NOT NULL,from1 varchar(255) NOT NULL,to1 varchar(255) NOT NULL,due varchar(255) NOT NULL,account int(11) NOT NULL)',(err,result)=>{
-        if(err) 
-        {
-            throw err;
-        }
+    dbservice.query('INSERT INTO bill_details (bill_id, service_charge, water_charge, sinking_fund, repair_fund, other_expense, from1, to1, due, account) VALUES(86, 23, 23, 23, 23, 0, "01-06-2018", "30-06-2018", "27-06-2018", 92)',(err,result)=>{
+       console.log(result);
     });
     res.send('hi');
 });
