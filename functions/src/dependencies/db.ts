@@ -10,7 +10,7 @@ interface mysqlConnection{
 class dbconnect implements mysqlConnection{
      host;user;password;database;
      constructor() {
-        this.host = 'ec2-54-163-229-212.compute-1.amazonaws.com:5432';
+        this.host = 'ec2-54-163-229-212.compute-1.amazonaws.com';
         this.user = `phmjzfzuxzkwgo`;
         this.password = `c65a4d4a5744a10ebe59c98214279da9dcc6419f6303d7c749a9aa2a54902ddd`;
         this.database = `d3s9ub0gtpaoit`;
