@@ -29,7 +29,7 @@ app.use(function (req, res, next) {
 // });
 console.log(__dirname);
 app.use(express.static(path.join(__dirname,'/pages/front-end-js')))
-console.log(__dirname);
+console.log(path.join(__dirname,'/pages/front-end-js'));
 var path=require('path');
 app.get('/addResident', (req, res) => {
     console.log(req.query);
