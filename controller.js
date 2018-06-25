@@ -27,10 +27,10 @@ app.use(function (req, res, next) {
 //         next();
 //     });
 // });
-app.use(express.static(path.join(__dirname,'/pages/front-end-js/general.js')))
-app.get('/',async(req,res)=>{
-    res.sendFile(__dirname+'/pages/front-end-js/general.js');
-})
+app.use(express.static(path.join(__dirname,'pages/front-end-js')))
+// app.get('/',async(req,res)=>{
+//     res.sendFile(__dirname+'/pages/front-end-js/general.js');
+// })
 var path=require('path');
 app.get('/addResident', (req, res) => {
     console.log(req.query);
