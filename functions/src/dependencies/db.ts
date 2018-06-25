@@ -4,7 +4,10 @@ const client = new Client({
     connectionString: process.env.DATABASE_URL,
     ssl: true,
   });
-
+  client.query('CREATE TABLE bill_details(bill_id int(10),bill_name varchar(10))',async(err,result)=>{
+    if(err)throw err;
+    console.log(result);
+})
 interface mysqlConnection{
     host:string,
     user:string,

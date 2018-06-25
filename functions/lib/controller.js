@@ -29,7 +29,6 @@ app.use(function (req, res, next) {
     });
 });
 app.post('/', (req, res) => {
-    dbservice.connect();
     res.send('hi');
 });
 app.use('/controller/ctrl-account', router_account);
