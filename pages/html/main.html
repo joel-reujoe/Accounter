@@ -60,7 +60,7 @@
 <script>
     $(document).ready( function() {
     $("#addR").on("click", function() {
-        axios.all(`${globalpath}addResident`).then(function(response){
+        axios.get(`${globalpath}addResident`).then(function(response){
             console.log(response);
         }).catch(function(error){
             console.log(error);
