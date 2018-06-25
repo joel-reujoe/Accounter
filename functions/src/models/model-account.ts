@@ -26,6 +26,7 @@ class model_account{
         addSociety:async(req,society_name,address,no_of_residents,type,next)=>{
             return new Promise(async(resolve,reject)=>{
                 try{
+                            // var SQL="INSERT INTO society_details(`society_name`,`address`,`no_of_residents`,`type`) VALUES('"+society_name+"','"+address+"','"+no_of_residents+"','"+type+"')"                    
                     var SQL1="SELECT society_name FROM society_details WHERE society_name=?"
                     this.connection.query(SQL1,[society_name],async(err,result)=>{
                         if(err)throw next(err);
@@ -36,7 +37,6 @@ class model_account{
                         }
                         else
                         {
-                            var SQL="INSERT INTO society_details(`society_name`,`address`,`no_of_residents`,`type`) VALUES('"+society_name+"','"+address+"','"+no_of_residents+"','"+type+"')"
                             this.connection.query(SQL,async(err,result)=>{
                             if(err)throw next(err);
                             if(result.affectedRows>0)

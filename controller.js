@@ -11,8 +11,9 @@ var path = require('path');
 var express = require('express');
 var sql = require('mysql');
 var bodyParser = require('body-parser');
-const Master_Functions1 = require('./functions/lib/dependencies/masterfunctions.js');
-var router_account = require('./functions/lib/routers/router_account.js');
+const Master_Functions1 = require('./dependencies/masterfunctions.js');
+var dbservice = require('./dependencies/db.js');
+var router_account = require('./routers/router_account.js');
 var app = express();
 app.use(bodyParser());
 app.use(function (req, res, next) {
@@ -20,58 +21,19 @@ app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
 });
-// app.use(function (req, res, next) {
-//     return __awaiter(this, void 0, void 0, function* () {`
-//         var service = yield new dbservice();
-//         req.connection = yield service.connectdb();
-//         next();
-//     });
-// });
-
-app.get('/front-end-js/general.js',async(req,res)=>{
-    res.setHeader('content-type','text/javascript')
-    res.sendFile(__dirname+'/pages/front-end-js/general.js');
-})
-var path=require('path');
-
-app.get('/addResident', (req, res) => {
-    console.log("hi")
-    res.setHeader('content-type','text/html');
-    res.sendFile(path.join(__dirname+'/pages/html/addResident.html'));
+app.use(function (req, res, next) {
+    return __awaiter(this, void 0, void 0, function* () {
+        var service = yield new dbservice();
+        req.connection = yield service.connectdb();
+        next();
+    });
 });
-
-app.get('/viewResident', (req, res) => {
-    console.log("hi")
-    res.setHeader('content-type','text/html');
-    res.sendFile(path.join(__dirname+'/pages/html/viewResident.html'));
-
-});app.get('/addResident', (req, res) => {
-    console.log("hi")
-    res.setHeader('content-type','text/html');
-    res.sendFile(path.join(__dirname+'/pages/html/addResident.html'));
+app.post('/', (req, res) => {
+    console.log(req.connection);
+    res.send('hi');
 });
-app.get('/addSociety', (req, res) => {
-    console.log("hi")
-    res.setHeader('content-type','text/html');
-    res.sendFile(path.join(__dirname+'/pages/html/addPage.html'));
-});
-app.get('/viewSociety', (req, res) => {
-    console.log("hi")
-    res.setHeader('content-type','text/html');
-    res.sendFile(path.join(__dirname+'/pages/html/viewPage.html'));
-});
-app.get('/createBill', (req, res) => {
-    console.log("hi")
-    res.setHeader('content-type','text/html');
-    res.sendFile(path.join(__dirname+'/pages/html/createBill.html'));
-});
-app.get('/main.html', (req, res) => {
-    console.log(req.query);
-    res.sendFile(path.join(__dirname+'/pages/html/main.html'));
-});
-var port=process.env.PORT || 8000
 app.use('/controller/ctrl-account', router_account);
-app.listen(port, () => {
-    console.log("Server Started at "+port);
+app.listen(8000, () => {
+    console.log("Server Started at 8000");
 });
 //# sourceMappingURL=controller.js.map
