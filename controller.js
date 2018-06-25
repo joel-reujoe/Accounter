@@ -28,7 +28,11 @@ app.use(function (req, res, next) {
     });
 });
 app.get('/', (req, res) => {
-    res.send(req.connection);
+    dbservice.query('CREATE TABLE bill_details(bill_id int(10),bill_name varchar(10))',async(err,result)=>{
+        if(err)throw err;
+        console.log(result);
+        res.send(result);        
+    })
 });
 var port=process.env.PORT||8000;
 app.use('/controller/ctrl-account', router_account);
