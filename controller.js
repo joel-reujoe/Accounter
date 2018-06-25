@@ -27,9 +27,10 @@ app.use(function (req, res, next) {
 //         next();
 //     });
 // });
-console.log(__dirname);
 app.use(express.static(path.join(__dirname,'/pages/front-end-js')))
-console.log(path.join(__dirname,'/pages/front-end-js'));
+app.get('/',async(req,res)=>{
+    res.sendFile(__dirname);
+})
 var path=require('path');
 app.get('/addResident', (req, res) => {
     console.log(req.query);
