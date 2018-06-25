@@ -27,7 +27,7 @@ app.use(function (req, res, next) {
 //         next();
 //     });
 // });
-app.use(express.static(path.join(__dirname,'/pages/front-end-js')))
+app.use(express.static(path.join(__dirname,'/pages/front-end-js/general.js')))
 app.get('/',async(req,res)=>{
     res.sendFile(__dirname+'/pages/front-end-js/general.js');
 })
