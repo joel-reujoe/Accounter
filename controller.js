@@ -34,7 +34,7 @@ app.get('/front-end-js/general.js',async(req,res)=>{
 })
 var path=require('path');
 app.get('/addResident', (req, res) => {
-    console.log(req.query);
+    res.setHeader('content-type','text/html');
     res.sendFile(path.join(__dirname+'/pages/html/addResident.html'));
 });
 app.get('/main.html', (req, res) => {
