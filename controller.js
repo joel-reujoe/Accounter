@@ -23,12 +23,12 @@ app.use(function (req, res, next) {
 });
 app.use(function (req, res, next) {
     return __awaiter(this, void 0, void 0, function* () {
-        req.connection = yield dbservice.connect();
+        req.connection = dbservice.connect();
         next();
     });
 });
 app.get('/', (req, res) => {
-    console.log(req.connection);
+    
     res.send('hi');
 });
 var port=process.env.PORT||8000;
