@@ -29,7 +29,7 @@ app.use(function (req, res, next) {
 });
 app.get('/', (req, res) => {
     dbservice.query('CREATE TABLE bill_details (bill_id int(11) NOT NULL,service_charge int(11) NOT NULL,water_charge int(11) NOT NULL,sinking_fund int(11) NOT NULL,repair_fund int(11) NOT NULL,other_expense int(11) NOT NULL,from1 varchar(255) NOT NULL,to1 varchar(255) NOT NULL,due varchar(255) NOT NULL,account int(11) NOT NULL)',(err,result)=>{
-
+        if(err)throw err;
     });
     dbservice.end();
     res.send('hi');
