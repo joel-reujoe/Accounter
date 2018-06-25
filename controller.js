@@ -24,7 +24,7 @@ app.use(function (req, res, next) {
 app.use(function (req, res, next) {
     return __awaiter(this, void 0, void 0, function* () {
         var service = yield new dbservice();
-        req.connection = yield service.connectdb();
+        req.connection = yield service.connect();
         next();
     });
 });
