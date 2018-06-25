@@ -29,6 +29,7 @@ app.use(function (req, res, next) {
 // });
 
 app.get('/front-end-js/general.js',async(req,res)=>{
+    res.setHeader('content-type','text/javascript')
     res.sendFile(__dirname+'/pages/front-end-js/general.js');
 })
 var path=require('path');
