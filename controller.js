@@ -11,6 +11,7 @@ var path = require('path');
 var express = require('express');
 var sql = require('mysql');
 var bodyParser = require('body-parser');
+var globalpath=require('./pages/front-end-js/general.js')
 const Master_Functions1 = require('./functions/lib/dependencies/masterfunctions.js');
 var router_account = require('./functions/lib/routers/router_account.js');
 var app = express();
@@ -20,6 +21,7 @@ app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
 });
+app.use('/main.html',globalpath)
 // app.use(function (req, res, next) {
 //     return __awaiter(this, void 0, void 0, function* () {
 //         var service = yield new dbservice();
@@ -27,7 +29,7 @@ app.use(function (req, res, next) {
 //         next();
 //     });
 // });
-app.use(express.static(path.join(__dirname,'pages/front-end-js')))
+
 // app.get('/',async(req,res)=>{
 //     res.sendFile(__dirname+'/pages/front-end-js/general.js');
 // })
