@@ -61,7 +61,6 @@
     $(document).ready( function() {
     $("#addR").on("click", function() {
         axios.get(`${globalpath}addResident`).then(function(response){
-            console.log(response.data);
             $('#content').html(response.data)
         }).catch(function(error){
             console.log(error);
@@ -70,20 +69,36 @@
 });
 $(document).ready( function() {
     $("#viewR").on("click", function() {
-        $("#content").load("viewResident.html");
+        axios.get(`${globalpath}viewResident`).then(function(response){
+            $('#content').html(response.data)
+        }).catch(function(error){
+            console.log(error);
+        })
     });
 });  $(document).ready( function() {
     $("#addS").on("click", function() {
-        $("#content").load("addPage.html");
+        axios.get(`${globalpath}addSociety`).then(function(response){
+            $('#content').html(response.data)
+        }).catch(function(error){
+            console.log(error);
+        })
     });
 });  $(document).ready( function() {
     $("#viewS").on("click", function() {
-        $("#content").load("viewPage.html");
+        axios.get(`${globalpath}viewSociety`).then(function(response){
+            $('#content').html(response.data)
+        }).catch(function(error){
+            console.log(error);
+        })
     });
 });
 $(document).ready( function() {
     $("#createBill").on("click", function() {
-        $("#content").load("createBill.html");
+        axios.get(`${globalpath}createBill`).then(function(response){
+            $('#content').html(response.data)
+        }).catch(function(error){
+            console.log(error);
+        })
     });
 });
 </script>
