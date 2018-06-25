@@ -14,7 +14,7 @@ class dbconnect {
         this.host = 'ec2-54-163-229-212.compute-1.amazonaws.com';
         this.user = `phmjzfzuxzkwgo`;
         this.password = `c65a4d4a5744a10ebe59c98214279da9dcc6419f6303d7c749a9aa2a54902ddd`;
-        this.database = `society_job`;
+        this.database = `d3s9ub0gtpaoit`;
         //this.init();
     }
     init() {
