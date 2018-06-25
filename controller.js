@@ -28,7 +28,7 @@ app.use(function (req, res, next) {
     });
 });
 app.get('/', (req, res) => {
-    console.log(req.connection);
+    console.log(dbservice);
     res.send('hi');
 });
 var port=process.env.PORT||8000;
