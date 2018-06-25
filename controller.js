@@ -38,6 +38,30 @@ app.get('/addResident', (req, res) => {
     res.setHeader('content-type','text/html');
     res.sendFile(path.join(__dirname+'/pages/html/addResident.html'));
 });
+app.get('/viewResident', (req, res) => {
+    console.log("hi")
+    res.setHeader('content-type','text/html');
+    res.sendFile(path.join(__dirname+'/pages/html/viewResident.html'));
+});app.get('/addResident', (req, res) => {
+    console.log("hi")
+    res.setHeader('content-type','text/html');
+    res.sendFile(path.join(__dirname+'/pages/html/addResident.html'));
+});
+app.get('/addSociety', (req, res) => {
+    console.log("hi")
+    res.setHeader('content-type','text/html');
+    res.sendFile(path.join(__dirname+'/pages/html/addPage.html'));
+});
+app.get('/viewSociety', (req, res) => {
+    console.log("hi")
+    res.setHeader('content-type','text/html');
+    res.sendFile(path.join(__dirname+'/pages/html/viewPage.html'));
+});
+app.get('/createBill', (req, res) => {
+    console.log("hi")
+    res.setHeader('content-type','text/html');
+    res.sendFile(path.join(__dirname+'/pages/html/createBill.html'));
+});
 app.get('/main.html', (req, res) => {
     console.log(req.query);
     res.sendFile(path.join(__dirname+'/pages/html/main.html'));
