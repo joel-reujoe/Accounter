@@ -61,7 +61,7 @@
     $(document).ready( function() {
     $("#addR").on("click", function() {
         axios.get(`${globalpath}addResident`).then(function(response){
-            console.log(response);
+            $('#content').load(response.data)
         }).catch(function(error){
             console.log(error);
         })
