@@ -33,15 +33,18 @@ app.get('/front-end-js/general.js',async(req,res)=>{
     res.sendFile(__dirname+'/pages/front-end-js/general.js');
 })
 var path=require('path');
+
 app.get('/addResident', (req, res) => {
     console.log("hi")
     res.setHeader('content-type','text/html');
     res.sendFile(path.join(__dirname+'/pages/html/addResident.html'));
 });
+
 app.get('/viewResident', (req, res) => {
     console.log("hi")
     res.setHeader('content-type','text/html');
     res.sendFile(path.join(__dirname+'/pages/html/viewResident.html'));
+
 });app.get('/addResident', (req, res) => {
     console.log("hi")
     res.setHeader('content-type','text/html');
