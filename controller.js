@@ -28,8 +28,7 @@ app.use(function (req, res, next) {
     });
 });
 app.get('/', (req, res) => {
-    
-    res.send('hi');
+    res.send(req.connection);
 });
 var port=process.env.PORT||8000;
 app.use('/controller/ctrl-account', router_account);
