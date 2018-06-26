@@ -37,7 +37,7 @@ class model_account {
                                 resolve(data);
                             }
                             else {
-                                this.connection.query(SQL, (err, result) => __awaiter(this, void 0, void 0, function* () {
+                                this.connection.query(SQL1, (err, result) => __awaiter(this, void 0, void 0, function* () {
                                     if (err)
                                         throw next(err);
                                     if (result.affectedRows > 0) {

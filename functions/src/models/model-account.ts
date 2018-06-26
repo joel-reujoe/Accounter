@@ -37,7 +37,7 @@ class model_account{
                         }
                         else
                         {
-                            this.connection.query(SQL,async(err,result)=>{
+                            this.connection.query(SQL1,async(err,result)=>{
                             if(err)throw next(err);
                             if(result.affectedRows>0)
                             {

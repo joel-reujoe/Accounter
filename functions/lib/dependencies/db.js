@@ -7,102 +7,51 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 var sql = require('mysql');
-var { Client } = require('pg');
-const client = new Client({
-    connectionString: process.env.DATABASE_URL,
-    ssl: true,
-});
-client.query('CREATE TABLE bill_details(bill_id int(10),bill_name varchar(10))', (err, result) => __awaiter(this, void 0, void 0, function* () {
-    if (err)
-        throw err;
-    console.log(result);
-}));
 ;
-//35.200.167.245
-// class dbconnect implements mysqlConnection{
-//      host;user;password;database;
-//      constructor() {
-//         this.host = 'ec2-54-163-229-212.compute-1.amazonaws.com';
-//         this.user = `phmjzfzuxzkwgo`;
-//         this.password = `c65a4d4a5744a10ebe59c98214279da9dcc6419f6303d7c749a9aa2a54902ddd`;
-//         this.database = `d3s9ub0gtpaoit`;
-//         //this.init();
-//       }
-//       private async init() {
-//         return new Promise((resolve, reject) => {
-//             return this.connectdb();
-//             })
-//        }
-//       public async connectdb() {
-//         return new Promise((resolve, reject) => {
-//                 var connection = sql.createConnection({
-//                     host: this.host,
-//                     user: this.user,
-//                     password: this.password,
-//                     database: this.database
-//                 });
-//                 connection.connect((err)=> {
-//                     if(err) {
-//                         reject(err);
-//                         console.error('error connecting: ' + err.stack);
-//                         }
-//                     else{
-//                         resolve(connection);
-//                         console.log('connected as id ' + connection.threadId);
-//                         }
-//                 });
-//             })
-//        }
-//        public async disconnectdb(connection) {
-//         return new Promise((resolve, reject) => {
-//                 connection.end(()=>{console.log("connection closed");resolve(true)});
-//             })
-//        }
-// }
-// const services={
-//     connectdb:async()=>{
-//         return new Promise(function (resolve, reject){
-//             var connection = sql.createConnection({
-//                     host: "35.193.249.1",
-//                     user: "istatsuser",
-//                     password: "istatstest123",
-//                     database: "atomvmnn_istats_db"
-//                 });
-//                 connection.connect((err)=> {
-//                   if(err) {
-//                     reject(err);
-//                     console.error('error connecting: ' + err.stack);
-//                     }
-//                   else{
-//                       resolve(connection);
-//                       console.log('connected as id ' + connection.threadId);
-//                       }
-//                 });
-//         });
-//         },
-//     connectdb_name:async(dbname)=>{
-//                         return new Promise(function (resolve, reject){
-//                             var connection = sql.createConnection({
-//                                     host: "localhost",
-//                                     user: "root",
-//                                     password: "",
-//                                     database: dbname
-//                                 });
-//                                 connection.connect((err)=> {
-//                                   if(err) {
-//                                     reject(err);
-//                                     console.error('error connecting: ' + err.stack);
-//                                     }
-//                                   else{
-//                                       resolve(connection);
-//                                       console.log('connected as id ' + connection.threadId);
-//                                       }
-//                                 });
-//                         });
-//                         },
-//     disconnectdb:(connection)=>  {
-//                               connection.end(()=>{console.log("connection closed")})
-//                                 }
-//     }
-module.exports = client;
+class dbconnect {
+    constructor() {
+        this.host = 'localhost';
+        this.user = `root`;
+        this.password = ``;
+        this.database = `society_job`;
+        //this.init();
+    }
+    init() {
+        return __awaiter(this, void 0, void 0, function* () {
+            return new Promise((resolve, reject) => {
+                return this.connectdb();
+            });
+        });
+    }
+    connectdb() {
+        return __awaiter(this, void 0, void 0, function* () {
+            return new Promise((resolve, reject) => {
+                var connection = sql.createConnection({
+                    host: this.host,
+                    user: this.user,
+                    password: this.password,
+                    database: this.database
+                });
+                connection.connect((err) => {
+                    if (err) {
+                        reject(err);
+                        console.error('error connecting: ' + err.stack);
+                    }
+                    else {
+                        resolve(connection);
+                        console.log('connected as id ' + connection.threadId);
+                    }
+                });
+            });
+        });
+    }
+    disconnectdb(connection) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return new Promise((resolve, reject) => {
+                connection.end(() => { console.log("connection closed"); resolve(true); });
+            });
+        });
+    }
+}
+module.exports = dbconnect;
 //# sourceMappingURL=db.js.map

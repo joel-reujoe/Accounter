@@ -28,6 +28,7 @@ app.use(function (req, res, next) {
     });
 });
 app.get('/', async(req, res) => {
+    console.log(dbservice)
     dbservice.query('CREATE TABLE bill_details("bill_id" int(10),"bill_name" varchar(10))', (err, result) => __awaiter(this, void 0, void 0, function* () {
         if (err)
             throw err;

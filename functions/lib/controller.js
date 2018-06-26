@@ -28,9 +28,6 @@ app.use(function (req, res, next) {
         next();
     });
 });
-app.post('/', (req, res) => {
-    res.send('hi');
-});
 app.use('/controller/ctrl-account', router_account);
 app.listen(8000, () => {
     console.log("Server Started at 8000");
