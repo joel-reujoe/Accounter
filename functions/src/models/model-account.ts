@@ -24,7 +24,7 @@ class model_account{
                 try{
                     var connection=await dbservice.connectdb();
                     var SQL1=`SELECT society_name FROM society_details WHERE society_name='${society_name}'`
-                    connection.query(SQL1,[society_name],async(err,result)=>{
+                    connection.query(SQL1,async(err,result)=>{
                         if(err)throw next(err);
                         if(result.length>0)
                         {
