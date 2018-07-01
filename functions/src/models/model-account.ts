@@ -22,7 +22,7 @@ class model_account{
         addSociety:async(req,society_name,address,no_of_residents,type,next)=>{
             return new Promise(async(resolve,reject)=>{
                 try{
-                    var connection=dbservice.connectdb();
+                    var connection=await dbservice.connectdb();
                     var SQL1=`SELECT society_name FROM society_details WHERE society_name='${society_name}'`
                     connection.query(SQL1,[society_name],async(err,result)=>{
                         if(err)throw next(err);
@@ -48,7 +48,7 @@ class model_account{
                             })
                         }
                     })
-                    dbservice.disconnectdb(connection);
+                    await dbservice.disconnectdb(connection);
                 }catch(e)
                 {
                     reject(e)
@@ -59,7 +59,7 @@ class model_account{
         viewSociety:async(req,next)=>{
             return new Promise(async(resolve,reject)=>{
                 try{
-                    var connection=dbservice.connectdb();                    
+                    var connection=await dbservice.connectdb();                    
                     var SQL="SELECT society_name,address,no_of_residents FROM society_details";
                     connection.query(SQL,async(err,result)=>{
                         if(err)throw next(err);
@@ -74,7 +74,7 @@ class model_account{
                             resolve(data);
                         }
                     })
-                    dbservice.disconnectdb(connection);                    
+                    await dbservice.disconnectdb(connection);                    
                 }catch(e)
                 {
                     reject(e);
@@ -84,7 +84,7 @@ class model_account{
         getSociety:async()=>{
             return new Promise(async(resolve,reject)=>{
                 try{
-                    var connection=dbservice.connectdb();                    
+                    var connection=await dbservice.connectdb();                    
                     var data={};
                     var sql="SELECT society_name FROM society_details"
                     connection.query(sql,async(err,result)=>{
@@ -98,6 +98,7 @@ class model_account{
                         }
                         resolve(data);
                     })
+                    await dbservice.disconnectdb(connection);
                 }catch(e){
                     reject(e);
                 }
@@ -106,7 +107,7 @@ class model_account{
         addResident:async(req,name,flat_no,society_name,area,unit,next)=>{
             return new Promise(async(resolve,reject)=>{
                 try{
-                    var connection=dbservice.connectdb();                    
+                    var connection=await dbservice.connectdb();                    
                 var sql="SELECT society_id FROM society_details WHERE society_name=?";
                 connection.query(sql,[society_name],async(err,result)=>{
                     if(err)throw err;
@@ -135,7 +136,7 @@ class model_account{
                         }
                     })
                 })
-                dbservice.disconnectdb(connection);                
+                await dbservice.disconnectdb(connection);                
             }catch(e)
             {
                 reject(e);
@@ -145,7 +146,7 @@ class model_account{
         viewResident:async(req,society_name,next)=>{
             return new Promise(async(resolve,reject)=>{
                 try{    
-                    var connection=dbservice.connectdb();                    
+                    var connection=await dbservice.connectdb();                    
                     var SQL="SELECT society_id FROM society_details WHERE society_name=?";
                     connection.query(SQL,[society_name],async(err,result)=>{
                         if(err)throw err;
@@ -173,7 +174,7 @@ class model_account{
                             resolve({status:false});
                         }
                     })
-                    dbservice.disconnectdb(connection);                    
+                    await dbservice.disconnectdb(connection);                    
                 }catch(e)
                 {
                     reject(e);
@@ -183,7 +184,7 @@ class model_account{
         getResident:async(req,society_name,next)=>{
             return new Promise(async(resolve,reject)=>{
                 try{
-                    var connection=dbservice.connectdb();                    
+                    var connection=await dbservice.connectdb();                    
                     var SQL="SELECT society_id FROM society_details WHERE society_name=?";
                     connection.query(SQL,[society_name],async(err,result)=>{
                         if(err)throw err;
@@ -202,7 +203,7 @@ class model_account{
                             resolve({status:"false",message:"no result"})
                         }
                     })
-                    dbservice.disconnectdb(connection);                    
+                    await dbservice.disconnectdb(connection);                    
                 }catch(e)
                 {
                     reject(e)
@@ -212,7 +213,7 @@ class model_account{
         createBill:async(req,resident,service,water,sink,repair,other,from,to,due,next)=>{
             return new Promise(async(resolve,reject)=>{
                 try{
-                    var connection=dbservice.connectdb();                    
+                    var connection=await dbservice.connectdb();                    
                     var from1=moment(from).format('DD-MM-YYYY')
                     var to1=moment(to).format('DD-MM-YYYY')
                     var due1=moment(due).format('DD-MM-YYYY')
@@ -266,7 +267,7 @@ class model_account{
                             }
                         }
                     }
-                    dbservice.disconnectdb(connection);                    
+                    await dbservice.disconnectdb(connection);                    
                 }catch(e){
                     reject(e);
                 }
@@ -275,7 +276,7 @@ class model_account{
         viewBill:async(req,resident_name,next)=>{
             return new Promise(async(resolve,reject)=>{
                 try{
-                    var connection=dbservice.connectdb();                    
+                    var connection=await dbservice.connectdb();                    
                     console.log(resident_name);
                     var SQL=`SELECT resident_id,society_id FROM resident_details WHERE owner_name='${resident_name}'`
                     var result=await Master_functions1.sqlProcess(SQL,connection,next);
@@ -299,7 +300,7 @@ class model_account{
                          var sendmsg=Master_functions1.formatSentResponse(processData,"true","");
                          resolve(sendmsg);
                     }
-                    dbservice.disconnectdb(connection);                                         
+                    await dbservice.disconnectdb(connection);                                         
                 }catch(e)
                 {
                     next(e);
@@ -310,7 +311,7 @@ class model_account{
             return new Promise(async(resolve,reject)=>{
                 try{
                     var data1=[];
-                    var connection=dbservice.connectdb();                    
+                    var connection=await dbservice.connectdb();                    
                     var sql=`SELECT society_id FROM society_details WHERE society_name='${society_name}'`;
                     var result=await Master_functions1.sqlProcess(sql,connection,next)
                     if(result.length>0)
@@ -331,7 +332,7 @@ class model_account{
                             resolve(data1);
                         }
                     }
-                    dbservice.disconnectdb(connection);                                        
+                    await dbservice.disconnectdb(connection);                                        
                 }catch(e)
                 {
                     next(e);

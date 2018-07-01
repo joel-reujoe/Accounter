@@ -29,7 +29,7 @@ class model_account {
             addSociety: (req, society_name, address, no_of_residents, type, next) => __awaiter(this, void 0, void 0, function* () {
                 return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
                     try {
-                        var connection = dbservice.connectdb();
+                        var connection = yield dbservice.connectdb();
                         var SQL1 = `SELECT society_name FROM society_details WHERE society_name='${society_name}'`;
                         connection.query(SQL1, [society_name], (err, result) => __awaiter(this, void 0, void 0, function* () {
                             if (err)
@@ -54,7 +54,7 @@ class model_account {
                                 }));
                             }
                         }));
-                        dbservice.disconnectdb(connection);
+                        yield dbservice.disconnectdb(connection);
                     }
                     catch (e) {
                         reject(e);
@@ -64,7 +64,7 @@ class model_account {
             viewSociety: (req, next) => __awaiter(this, void 0, void 0, function* () {
                 return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
                     try {
-                        var connection = dbservice.connectdb();
+                        var connection = yield dbservice.connectdb();
                         var SQL = "SELECT society_name,address,no_of_residents FROM society_details";
                         connection.query(SQL, (err, result) => __awaiter(this, void 0, void 0, function* () {
                             if (err)
@@ -78,7 +78,7 @@ class model_account {
                                 resolve(data);
                             }
                         }));
-                        dbservice.disconnectdb(connection);
+                        yield dbservice.disconnectdb(connection);
                     }
                     catch (e) {
                         reject(e);
@@ -88,7 +88,7 @@ class model_account {
             getSociety: () => __awaiter(this, void 0, void 0, function* () {
                 return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
                     try {
-                        var connection = dbservice.connectdb();
+                        var connection = yield dbservice.connectdb();
                         var data = {};
                         var sql = "SELECT society_name FROM society_details";
                         connection.query(sql, (err, result) => __awaiter(this, void 0, void 0, function* () {
@@ -102,6 +102,7 @@ class model_account {
                             }
                             resolve(data);
                         }));
+                        yield dbservice.disconnectdb(connection);
                     }
                     catch (e) {
                         reject(e);
@@ -111,7 +112,7 @@ class model_account {
             addResident: (req, name, flat_no, society_name, area, unit, next) => __awaiter(this, void 0, void 0, function* () {
                 return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
                     try {
-                        var connection = dbservice.connectdb();
+                        var connection = yield dbservice.connectdb();
                         var sql = "SELECT society_id FROM society_details WHERE society_name=?";
                         connection.query(sql, [society_name], (err, result) => __awaiter(this, void 0, void 0, function* () {
                             if (err)
@@ -140,7 +141,7 @@ class model_account {
                                 }
                             }));
                         }));
-                        dbservice.disconnectdb(connection);
+                        yield dbservice.disconnectdb(connection);
                     }
                     catch (e) {
                         reject(e);
@@ -150,7 +151,7 @@ class model_account {
             viewResident: (req, society_name, next) => __awaiter(this, void 0, void 0, function* () {
                 return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
                     try {
-                        var connection = dbservice.connectdb();
+                        var connection = yield dbservice.connectdb();
                         var SQL = "SELECT society_id FROM society_details WHERE society_name=?";
                         connection.query(SQL, [society_name], (err, result) => __awaiter(this, void 0, void 0, function* () {
                             if (err)
@@ -176,7 +177,7 @@ class model_account {
                                 resolve({ status: false });
                             }
                         }));
-                        dbservice.disconnectdb(connection);
+                        yield dbservice.disconnectdb(connection);
                     }
                     catch (e) {
                         reject(e);
@@ -186,7 +187,7 @@ class model_account {
             getResident: (req, society_name, next) => __awaiter(this, void 0, void 0, function* () {
                 return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
                     try {
-                        var connection = dbservice.connectdb();
+                        var connection = yield dbservice.connectdb();
                         var SQL = "SELECT society_id FROM society_details WHERE society_name=?";
                         connection.query(SQL, [society_name], (err, result) => __awaiter(this, void 0, void 0, function* () {
                             if (err)
@@ -207,7 +208,7 @@ class model_account {
                                 resolve({ status: "false", message: "no result" });
                             }
                         }));
-                        dbservice.disconnectdb(connection);
+                        yield dbservice.disconnectdb(connection);
                     }
                     catch (e) {
                         reject(e);
@@ -217,7 +218,7 @@ class model_account {
             createBill: (req, resident, service, water, sink, repair, other, from, to, due, next) => __awaiter(this, void 0, void 0, function* () {
                 return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
                     try {
-                        var connection = dbservice.connectdb();
+                        var connection = yield dbservice.connectdb();
                         var from1 = moment(from).format('DD-MM-YYYY');
                         var to1 = moment(to).format('DD-MM-YYYY');
                         var due1 = moment(due).format('DD-MM-YYYY');
@@ -264,7 +265,7 @@ class model_account {
                                 }
                             }
                         }
-                        dbservice.disconnectdb(connection);
+                        yield dbservice.disconnectdb(connection);
                     }
                     catch (e) {
                         reject(e);
@@ -274,7 +275,7 @@ class model_account {
             viewBill: (req, resident_name, next) => __awaiter(this, void 0, void 0, function* () {
                 return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
                     try {
-                        var connection = dbservice.connectdb();
+                        var connection = yield dbservice.connectdb();
                         console.log(resident_name);
                         var SQL = `SELECT resident_id,society_id FROM resident_details WHERE owner_name='${resident_name}'`;
                         var result = yield Master_functions1.sqlProcess(SQL, connection, next);
@@ -296,7 +297,7 @@ class model_account {
                             var sendmsg = Master_functions1.formatSentResponse(processData, "true", "");
                             resolve(sendmsg);
                         }
-                        dbservice.disconnectdb(connection);
+                        yield dbservice.disconnectdb(connection);
                     }
                     catch (e) {
                         next(e);
@@ -307,7 +308,7 @@ class model_account {
                 return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
                     try {
                         var data1 = [];
-                        var connection = dbservice.connectdb();
+                        var connection = yield dbservice.connectdb();
                         var sql = `SELECT society_id FROM society_details WHERE society_name='${society_name}'`;
                         var result = yield Master_functions1.sqlProcess(sql, connection, next);
                         if (result.length > 0) {
@@ -325,7 +326,7 @@ class model_account {
                                 resolve(data1);
                             }
                         }
-                        dbservice.disconnectdb(connection);
+                        yield dbservice.disconnectdb(connection);
                     }
                     catch (e) {
                         next(e);
