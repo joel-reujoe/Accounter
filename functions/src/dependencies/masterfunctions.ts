@@ -54,7 +54,7 @@ class Master_Functions
         };
         return url;
       }
-      static sqlProcess=async(sql,connection,dbservice,next)=>{
+      static sqlProcess=async(sql,connection,next)=>{
         return new Promise(async(resolve,reject)=>{
             try
             {
@@ -62,7 +62,6 @@ class Master_Functions
                     if(err)next(err);
                     resolve(result);
                 })
-                await dbservice.disconnectdb(connection)
             }catch(e){
                 next(e)
             }
