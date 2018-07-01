@@ -14,7 +14,7 @@ class dbconnect {
         this.user = `sql12245485`;
         this.password = `G1Icbj8A77`;
         this.database = `sql12245485`;
-        this.init();
+        // this.init();
     }
     init() {
         return __awaiter(this, void 0, void 0, function* () {
