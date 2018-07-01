@@ -173,6 +173,7 @@ class model_account {
                                 resolve({ status: false });
                             }
                         }));
+                        yield dbservice.disconnectdb(connection);
                     }
                     catch (e) {
                         reject(e);
