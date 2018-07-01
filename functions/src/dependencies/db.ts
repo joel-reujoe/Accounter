@@ -13,7 +13,7 @@ class dbconnect implements mysqlConnection{
         this.user = `sql12245485`;
         this.password = `G1Icbj8A77`;
         this.database = `sql12245485`;
-        this.init();
+        // this.init();
       }
       private async init() {
         return new Promise((resolve, reject) => {
