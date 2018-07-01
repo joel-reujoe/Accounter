@@ -13,7 +13,7 @@ const Master_functions1 = require('../dependencies/masterfunctions.js');
 const db = require('../dependencies/db.js');
 var dbservice = new db();
 class model_account {
-    constructor(connection) {
+    constructor() {
         this.model_functions = {
             test_model: (req, text, next) => __awaiter(this, void 0, void 0, function* () {
                 return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
@@ -333,9 +333,6 @@ class model_account {
                 }));
             })
         };
-        connection = connection;
-        this.hrtime = process.hrtime;
-        this.datetimestamp = moment();
     }
 }
 module.exports = model_account;

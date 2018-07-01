@@ -6,12 +6,6 @@ const db=require('../dependencies/db.js')
 var dbservice=new db();
 class model_account{
     public connection;hrtime;datetimestamp;
-    constructor(connection)
-    {
-        connection=connection;
-        this.hrtime=process.hrtime;
-        this.datetimestamp=moment();
-    }
     public model_functions={
         test_model:async(req,text,next)=>
         {
