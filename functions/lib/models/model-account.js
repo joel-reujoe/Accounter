@@ -160,18 +160,15 @@ class model_account {
                             if (result.length > 0) {
                                 console.log(result);
                                 var sql = "SELECT owner_name, society_name, flat_no,area FROM resident_details WHERE society_id=?";
-                                connection.query(sql, [result[0].society_id], (err, result1) => __awaiter(this, void 0, void 0, function* () {
-                                    if (err)
-                                        throw err;
-                                    if (result1.length > 0) {
-                                        var data = { status: "true", message: result1 };
-                                        resolve(data);
-                                    }
-                                    else {
-                                        data = { status: "false", message: "no result to display" };
-                                        resolve(data);
-                                    }
-                                }));
+                                var result1 = yield Master_functions1.sqlProcess(sql, connection, next);
+                                if (result.length > 0) {
+                                    var data = { status: "true", message: result1 };
+                                    resolve(data);
+                                }
+                                else {
+                                    data = { status: "false", message: "no result to display" };
+                                    resolve(data);
+                                }
                             }
                             else {
                                 resolve({ status: false });

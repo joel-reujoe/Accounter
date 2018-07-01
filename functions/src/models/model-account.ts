@@ -155,20 +155,17 @@ class model_account{
                         {
                             console.log(result);
                             var sql="SELECT owner_name, society_name, flat_no,area FROM resident_details WHERE society_id=?";
-                            connection.query(sql,[result[0].society_id],async(err,result1)=>{
-                                if(err)throw err;
-                                if(result1.length>0)
-                                {
-                                    var data={status:"true",message:result1}
-                                    resolve(data);
-                                }
-                                else
-                                {
-                                    data={status:"false",message:"no result to display"}
-                                    resolve(data);
-                                }
-                               
-                            })
+                            var result1=await Master_functions1.sqlProcess(sql,connection,next);
+                            if(result.length>0)
+                            {
+                                var data={status:"true",message:result1}
+                                resolve(data);
+                            }
+                            else
+                            {
+                                data={status:"false",message:"no result to display"}
+                                resolve(data);
+                            }
                         }
                         else{
                             resolve({status:false});
