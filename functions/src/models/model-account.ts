@@ -170,7 +170,6 @@ class model_account{
                             resolve({status:false});
                         }
                     })
-                    await dbservice.disconnectdb(connection);                    
                 }catch(e)
                 {
                     reject(e);
