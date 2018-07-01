@@ -32,7 +32,8 @@ app.get('/main.html',async(req,res,next)=>{
     res.sendFile(path.join(__dirname,'/pages/html/main.html'))
 })
 app.get('/front-end/general.js',async(req,res,next)=>{
-    res.sendFile(path.join(__dirname,'/front-end/general.js'))
+    res.setHeader('content-type','text/javascript')
+    res.sendFile(path.join(__dirname,'/pages/front-end/general.js'))
 })
 app.get('/addPage',async(req,res,next)=>{
     res.sendFile(path.join(__dirname,'/pages/html/addPage.html'))
