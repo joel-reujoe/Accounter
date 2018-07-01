@@ -153,7 +153,7 @@ class model_account{
                         if(result.length>0)
                         {
                             console.log(result);
-                            var sql="SELECT owner_name, society_name, flat_no,area FROM resident_details WHERE society_id=?";
+                            var sql=`SELECT owner_name, society_name, flat_no,area FROM resident_details WHERE society_id=${society_name}`;
                             var result1=await Master_functions1.sqlProcess(sql,connection,next);
                             if(result1.length>0)
                             {
