@@ -62,7 +62,6 @@ class Master_Functions
                     if(err)next(err);
                     resolve(result);
                 })
-                await dbservice.disconnectdb(connection);                                                    
             }catch(e){
                 next(e)
             }

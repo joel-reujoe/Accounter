@@ -155,7 +155,7 @@ class model_account{
                             console.log(result);
                             var sql="SELECT owner_name, society_name, flat_no,area FROM resident_details WHERE society_id=?";
                             var result1=await Master_functions1.sqlProcess(sql,connection,next);
-                            if(result.length>0)
+                            if(result1.length>0)
                             {
                                 var data={status:"true",message:result1}
                                 resolve(data);
