@@ -53,7 +53,7 @@ Master_Functions.logacesstoFbase = (req, res, next, hrstart) => __awaiter(this, 
     }));
 });
 Master_Functions.catchErrors = (fn) => (req, res, next) => fn(req, res, next).catch(next);
-Master_Functions.sqlProcess = (sql, connection, next) => __awaiter(this, void 0, void 0, function* () {
+Master_Functions.sqlProcess = (sql, connection, dbservice, next) => __awaiter(this, void 0, void 0, function* () {
     return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
         try {
             connection.query(sql, (err, result) => __awaiter(this, void 0, void 0, function* () {
@@ -61,6 +61,7 @@ Master_Functions.sqlProcess = (sql, connection, next) => __awaiter(this, void 0,
                     next(err);
                 resolve(result);
             }));
+            yield dbservice.disconnectdb(connection);
         }
         catch (e) {
             next(e);

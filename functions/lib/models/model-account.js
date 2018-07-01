@@ -159,7 +159,7 @@ class model_account {
                             if (result.length > 0) {
                                 console.log(result);
                                 var sql = `SELECT owner_name, society_name, flat_no,area FROM resident_details WHERE society_id=${result[0].society_id}`;
-                                var result1 = yield Master_functions1.sqlProcess(sql, connection, next);
+                                var result1 = yield Master_functions1.sqlProcess(sql, connection, dbservice, next);
                                 if (result1.length > 0) {
                                     var data = { status: "true", message: result1 };
                                     resolve(data);
@@ -173,7 +173,6 @@ class model_account {
                                 resolve({ status: false });
                             }
                         }));
-                        yield dbservice.disconnectdb(connection);
                     }
                     catch (e) {
                         reject(e);
