@@ -28,6 +28,10 @@ app.use(function (req, res, next) {
         next();
     });
 });
+app.get('/front-end-js/general.js',async(req,res)=>{
+    res.setHeader('content-type','text/javascript')
+    res.sendFile(__dirname+'/pages/front-end-js/general.js');
+})
 app.get('/main.html',async(req,res,next)=>{
     res.sendFile(path.join(__dirname,'/pages/html/main.html'))
 })
