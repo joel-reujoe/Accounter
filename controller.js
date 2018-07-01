@@ -28,6 +28,9 @@ app.use(function (req, res, next) {
         next();
     });
 });
+app.get('/main.html',async(req,res,next)=>{
+    res.sendFile(path.join(__dirname,'/pages/html/main.html'))
+})
 app.get('/front-end/general.js',async(req,res,next)=>{
     res.sendFile(path.join(__dirname,'/front-end/general.js'))
 })
