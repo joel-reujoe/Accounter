@@ -19,6 +19,13 @@ class ctrl_account {
                 var data = yield model_account_object.model_functions.test_model(req, text, next);
                 return data;
             }),
+            authenticate: (req, next) => __awaiter(this, void 0, void 0, function* () {
+                var model_account_object = new model_account();
+                var email = req.body.email;
+                var password = req.body.password;
+                var data = yield model_account_object.model_functions.auth(req, email, password, next);
+                return data;
+            }),
             addSociety: (req, next) => __awaiter(this, void 0, void 0, function* () {
                 console.log(req.body);
                 var society_name = req.body.society_name;

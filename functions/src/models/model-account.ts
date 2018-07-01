@@ -34,21 +34,18 @@ class model_account{
                         else
                         {
                             var SQL="INSERT INTO society_details(`society_name`,`address`,`no_of_residents`,`type`) VALUES('"+society_name+"','"+address+"','"+no_of_residents+"','"+type+"')"                                                
-                            connection.query(SQL,async(err,result)=>{
-                            if(err)throw next(err);
-                            if(result.affectedRows>0)
+                            var result1=await Master_functions1.sqlProcess(SQL,connection,dbservice,next);
+                            if(result1.affectedRows>0)
                             {
                                 var data={status:"true",message:"Society Registered"};
-                                resolve(data);
+                                resolve(data)
                             }
                             else{
                                 data={status:"false",message:"Society Register Failed"};
                                 resolve(data);
                             }
-                            })
                         }
                     })
-                    await dbservice.disconnectdb(connection);
                 }catch(e)
                 {
                     reject(e)
@@ -185,20 +182,20 @@ class model_account{
                         if(err)throw err;
                         if(result.length){
                             var id=result[0].society_id;
-                            var SQL1="SELECT owner_name FROM resident_details WHERE society_id=?";
-                            connection.query(SQL1,[id],async(err,result1)=>{
-                                if(err)throw err;
-                                if(result1.length>0)
-                                {
-                                    var data={status:"true",message:result1};
-                                    resolve(data);
-                                }
-                            })
+                            var SQL1="SELECT owner_name FROM resident_details WHERE society_id="+id;
+                            var result1=await Master_functions1.sqlProcess(SQL1,connection,dbservice,next);
+                            if(result.length>0)
+                            {
+                                var data={status:"true",message:result1};
+                                resolve(data);
+                            }
+                            else{
+                                resolve({status:"false",message:"no result"})
+                            }
                         }else{
-                            resolve({status:"false",message:"no result"})
+                            resolve({status:"false",message:"no result"})                            
                         }
                     })
-                    await dbservice.disconnectdb(connection);                    
                 }catch(e)
                 {
                     reject(e)
@@ -222,24 +219,27 @@ class model_account{
                     {
                         var SQL=`INSERT INTO bill_details(service_charge,water_charge,sinking_fund,repair_fund,other_expense,from1,to1,due,account) VALUES(${service},${water},${sink},${repair},${other},'${from1}','${to1}','${due1}',${amount})`;                        
                     }
-                    var result=await Master_functions1.sqlProcess(SQL,connection,next);
+                    var result=await Master_functions1.sqlProcess(SQL,connection,dbservice,next);
                     if(result.affectedRows>0)
                     {
                         var bill_id=result.insertId;
+                        var connection=await dbservice.connectdb();                                            
                         var SQL2=`SELECT resident_id FROM resident_details WHERE owner_name='${resident}'`;
-                        var result2=await Master_functions1.sqlProcess(SQL2,connection,next);
+                        var result2=await Master_functions1.sqlProcess(SQL2,connection,dbservice,next);
                         console.log(result2);
                         if(result2.length>0)
                         {
+                            var connection=await dbservice.connectdb();                                                                        
                             var SQL3=`SELECT SUM(amount) AS amount_pending FROM bill_resident_mapping WHERE resident_id=${result2[0].resident_id} AND status='pending'`;
-                            var result3=await Master_functions1.sqlProcess(SQL3,connection,next);
+                            var result3=await Master_functions1.sqlProcess(SQL3,connection,dbservice,next);
                             if(result3[0].amount_pending==null)
                             {
                                 var amount=Number(service)+Number(water)+Number(sink)+Number(repair)+Number(other);
                                 console.log("hi")
                                 console.log(amount);
+                                var connection=await dbservice.connectdb();                                                                                                        
                                 var SQL4=`INSERT INTO bill_resident_mapping(bill_id,resident_id,status,amount)VALUES (${bill_id},${result2[0].resident_id},'pending',${amount})`;
-                                var result4=await Master_functions1.sqlProcess(SQL4,connection,next)
+                                var result4=await Master_functions1.sqlProcess(SQL4,connection,dbservice,next)
                                 if(result4.affectedRows>0)
                                 {
                                     resolve({status:true});
@@ -249,9 +249,10 @@ class model_account{
                                 }
                             }
                             else{
+                                var connection=await dbservice.connectdb();                                                                                                                                        
                                 var amount=Number(service)+Number(water)+Number(sink)+Number(repair)+Number(other)+Number(result3[0].amount_pending)
                                 var SQL5=`INSERT INTO bill_resident_mapping(bill_id,resident_id,status,amount)VALUES(${bill_id},${result2[0].resident_id},'pending',${amount})`;
-                                var result4=await Master_functions1.sqlProcess(SQL5,connection,next);
+                                var result4=await Master_functions1.sqlProcess(SQL5,connection,dbservice,next);
                                 if(result4.affectedRows>0)
                                 {
                                     resolve({status:true})
@@ -262,11 +263,31 @@ class model_account{
                             }
                         }
                     }
-                    await dbservice.disconnectdb(connection);                    
                 }catch(e){
                     reject(e);
                 }
             })
+        },
+        auth:async(req,email,password,next)=>{
+            return new Promise(async(resolve,reject)=>{
+                try{
+                    var connection=await dbservice.connectdb();
+                    var sql=`SELECT email FROM signin WHERE email='${email}' AND pas='${password}'`;
+                    console.log(sql);
+                    var result=await Master_functions1.sqlProcess(sql,connection,dbservice,next);
+                    if(result.length>0)
+                    {
+                        resolve({status:true});
+                    }   
+                    else
+                    {
+                        resolve({status:false});
+                    }
+                }catch(e)
+                {
+                    reject(e);
+                }   
+            })      
         },
         viewBill:async(req,resident_name,next)=>{
             return new Promise(async(resolve,reject)=>{
@@ -274,19 +295,24 @@ class model_account{
                     var connection=await dbservice.connectdb();                    
                     console.log(resident_name);
                     var SQL=`SELECT resident_id,society_id FROM resident_details WHERE owner_name='${resident_name}'`
-                    var result=await Master_functions1.sqlProcess(SQL,connection,next);
+                    var result=await Master_functions1.sqlProcess(SQL,connection,dbservice,next);
                     if(result.length>0)
                     {
                         var SQL1=`SELECT society_name,Address,type FROM society_details WHERE society_id=${result[0].society_id}`
                         var SQL2=`SELECT MAX(amount) as outstanding FROM bill_resident_mapping WHERE resident_id=${result[0].resident_id} AND status='pending' AND amount<(SELECT MAX(amount) FROM bill_resident_mapping)`;
-                        var result1=await Master_functions1.sqlProcess(SQL1,connection,next);
-                        var result2=await Master_functions1.sqlProcess(SQL2,connection,next);
+                        var connection=await dbservice.connectdb();                                            
+                        var result1=await Master_functions1.sqlProcess(SQL1,connection,dbservice,next);
+                        var connection=await dbservice.connectdb();                                            
+                        var result2=await Master_functions1.sqlProcess(SQL2,connection,dbservice,next);
+                        var connection=await dbservice.connectdb();                                            
                         var SQL3=`SELECT bill_id, count(bill_id) as count FROM bill_resident_mapping WHERE resident_id=${result[0].resident_id}`;
-                        var result3=await Master_functions1.sqlProcess(SQL3,connection,next);
+                        var result3=await Master_functions1.sqlProcess(SQL3,connection,dbservice,next);
+                        var connection=await dbservice.connectdb();                                            
                         var SQL4=`SELECT bill_id,service_charge,water_charge,sinking_fund,repair_fund,other_expense,from1,to1,due,account FROM bill_details WHERE bill_id=${result3[0].bill_id}`
-                        var result4=await Master_functions1.sqlProcess(SQL4,connection,next);
+                        var result4=await Master_functions1.sqlProcess(SQL4,connection,dbservice,next);
+                        var connection=await dbservice.connectdb();                                            
                         var SQL5=`SELECT flat_no, area,owner_name,unit FROM resident_details WHERE owner_name='${resident_name}'`
-                        var result5=await Master_functions1.sqlProcess(SQL5,connection,next);
+                        var result5=await Master_functions1.sqlProcess(SQL5,connection,dbservice,next);
                         if(result2[0].outstanding==null)
                         {
                             result2[0].outstanding=0;
@@ -308,13 +334,15 @@ class model_account{
                     var data1=[];
                     var connection=await dbservice.connectdb();                    
                     var sql=`SELECT society_id FROM society_details WHERE society_name='${society_name}'`;
-                    var result=await Master_functions1.sqlProcess(sql,connection,next)
+                    var result=await Master_functions1.sqlProcess(sql,connection,dbservice,next)
                     if(result.length>0)
                     {
+                        var connection=await dbservice.connectdb();                                            
                         var sql1=`SELECT count(*) as count FROM resident_details WHERE society_id=${result[0].society_id}`
-                        var result1=await Master_functions1.sqlProcess(sql1,connection,next);
+                        var result1=await Master_functions1.sqlProcess(sql1,connection,dbservice,next);
+                        var connection=await dbservice.connectdb();                                            
                         var sql2=`SELECT owner_name FROM resident_details WHERE society_id=${result[0].society_id}`;
-                        var result2=await Master_functions1.sqlProcess(sql2,connection,next);
+                        var result2=await Master_functions1.sqlProcess(sql2,connection,dbservice,next);
                         console.log(result2);                
                         if(result1[0].count>0)
                         {

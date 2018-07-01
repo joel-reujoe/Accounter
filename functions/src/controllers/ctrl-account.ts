@@ -19,6 +19,13 @@ class ctrl_account{
             var data=await model_account_object.model_functions.test_model(req,text,next);
             return data;
         },
+        authenticate:async(req,next)=>{
+            var model_account_object=new model_account();            
+            var email=req.body.email;
+            var password=req.body.password;
+            var data=await model_account_object.model_functions.auth(req,email,password,next);
+            return data;
+        },
         addSociety:async(req,next)=>{
             console.log(req.body);
             var society_name=req.body.society_name;

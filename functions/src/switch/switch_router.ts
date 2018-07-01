@@ -16,6 +16,10 @@ class switch_router
         // console.log(req.body);
         switch(action)
         {
+            case "authenticate":
+                var data=await ctrl_account_object.ctrl_functions.authenticate(req,next);
+                res.send(data)
+                break;
             case "addSociety":
                 var data=await ctrl_account_object.ctrl_functions.addSociety(req,next);
                 res.send(data);

@@ -17,6 +17,10 @@ class switch_router {
             var ctrl_account_object = new ctrl_account();
             // console.log(req.body);
             switch (action) {
+                case "authenticate":
+                    var data = yield ctrl_account_object.ctrl_functions.authenticate(req, next);
+                    res.send(data);
+                    break;
                 case "addSociety":
                     var data = yield ctrl_account_object.ctrl_functions.addSociety(req, next);
                     res.send(data);

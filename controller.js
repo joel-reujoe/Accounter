@@ -21,7 +21,10 @@ app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
 });
-
+app.get('/login.html',async(req,res)=>{
+    res.setHeader('content-type','text/javascript')
+    res.sendFile(__dirname+'/pages/html/login.html');
+})
 app.get('/front-end-js/general.js',async(req,res)=>{
     res.setHeader('content-type','text/javascript')
     res.sendFile(__dirname+'/pages/front-end-js/general.js');
