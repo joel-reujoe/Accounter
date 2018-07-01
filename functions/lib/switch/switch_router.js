@@ -14,7 +14,7 @@ class switch_router {
     constructor() {
         this.switch_account = (req, res, next) => __awaiter(this, void 0, void 0, function* () {
             var action = req.body.action;
-            var ctrl_account_object = new ctrl_account(req.connection);
+            var ctrl_account_object = new ctrl_account();
             // console.log(req.body);
             switch (action) {
                 case "addSociety":

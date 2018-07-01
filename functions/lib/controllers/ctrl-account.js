@@ -11,11 +11,11 @@ const moment1 = require('moment');
 moment().tz('Asia/Kolkata');
 var model_account = require('../models/model-account.js');
 class ctrl_account {
-    constructor(connection) {
+    constructor() {
         this.ctrl_functions = {
             test: (req, next) => __awaiter(this, void 0, void 0, function* () {
                 var text = req.query.text;
-                var model_account_object = new model_account(this.connection);
+                var model_account_object = new model_account();
                 var data = yield model_account_object.model_functions.test_model(req, text, next);
                 return data;
             }),
@@ -122,7 +122,6 @@ class ctrl_account {
         };
         this.datetimestamp = moment();
         this.hrtime = process.hrtime;
-        this.connection = connection;
     }
 }
 module.exports = ctrl_account;

@@ -5,18 +5,17 @@ var model_account=require('../models/model-account.js');
 class ctrl_account{
 
     public hrtime;datetimestamp;connection;
-    constructor(connection)
+    constructor()
     {
 
         this.datetimestamp=moment();
         this.hrtime=process.hrtime;
-        this.connection=connection;
     }
     public ctrl_functions={
         test:async(req,next)=>
         {
             var text=req.query.text;
-            var model_account_object=new model_account(this.connection);
+            var model_account_object=new model_account();
             var data=await model_account_object.model_functions.test_model(req,text,next);
             return data;
         },

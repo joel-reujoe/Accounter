@@ -12,7 +12,7 @@ class switch_router
     }
     public switch_account=async(req,res,next)=>{
         var action=req.body.action;
-        var ctrl_account_object=new ctrl_account(req.connection);
+        var ctrl_account_object=new ctrl_account();
         // console.log(req.body);
         switch(action)
         {
