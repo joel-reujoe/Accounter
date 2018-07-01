@@ -31,29 +31,33 @@ app.use(function (req, res, next) {
 app.get('/main.html',async(req,res,next)=>{
     res.sendFile(path.join(__dirname,'/pages/html/main.html'))
 })
-app.get('/front-end/general.js',async(req,res,next)=>{
-    res.setHeader('content-type','text/javascript')
-    res.sendFile(path.join(__dirname,'/pages/front-end/general.js'))
-})
+res.sendFile(__dirname+'/pages/front-end-js/general.js');
 app.get('/addPage',async(req,res,next)=>{
-    res.sendFile(path.join(__dirname,'/pages/html/addPage.html'))
+    res.setHeader('content-type','text/javascript')    
+    res.sendFile(__dirname+'/pages/html/addPage.html')
 })
 app.get('/addResident',async(req,res,next)=>{
+    res.setHeader('content-type','text/html');
     res.sendFile(path.join(__dirname,'/pages/html/addResident.html'))
 })
 app.get('/createBill',async(req,res,next)=>{
+    res.setHeader('content-type','text/html');
     res.sendFile(path.join(__dirname,'/pages/html/createBill.html'))
 })
 app.get('/viewAll',async(req,res,next)=>{
+    res.setHeader('content-type','text/html');
     res.sendFile(path.join(__dirname,'/pages/html/viewAll.html'))
 })
 app.get('/viewBill',async(req,res,next)=>{
+    res.setHeader('content-type','text/html');
     res.sendFile(path.join(__dirname,'/pages/html/viewBill.html'))
 })
 app.get('/viewPage',async(req,res,next)=>{
+    res.setHeader('content-type','text/html');
     res.sendFile(path.join(__dirname,'/pages/html/viewPage.html'))
 })
 app.get('/viewResident',async(req,res,next)=>{
+    res.setHeader('content-type','text/html');
     res.sendFile(path.join(__dirname,'/pages/html/viewResident.html'))
 })
 var port=process.env.PORT||8000;
