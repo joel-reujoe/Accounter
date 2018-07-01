@@ -9,11 +9,11 @@ interface mysqlConnection{
 class dbconnect implements mysqlConnection{
      host;user;password;database;
      constructor() {
-        this.host = 'localhost';
-        this.user = `root`;
-        this.password = ``;
-        this.database = `society_job`;
-        //this.init();
+        this.host = 'sql12.freemysqlhosting.net';
+        this.user = `sql12245485`;
+        this.password = `G1Icbj8A77`;
+        this.database = `sql12245485`;
+        this.init();
       }
       private async init() {
         return new Promise((resolve, reject) => {

@@ -10,11 +10,11 @@ var sql = require('mysql');
 ;
 class dbconnect {
     constructor() {
-        this.host = 'localhost';
-        this.user = `root`;
-        this.password = ``;
-        this.database = `society_job`;
-        //this.init();
+        this.host = 'sql12.freemysqlhosting.net';
+        this.user = `sql12245485`;
+        this.password = `G1Icbj8A77`;
+        this.database = `sql12245485`;
+        this.init();
     }
     init() {
         return __awaiter(this, void 0, void 0, function* () {

@@ -27,8 +27,7 @@ class model_account {
             addSociety: (req, society_name, address, no_of_residents, type, next) => __awaiter(this, void 0, void 0, function* () {
                 return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
                     try {
-                        // var SQL="INSERT INTO society_details(`society_name`,`address`,`no_of_residents`,`type`) VALUES('"+society_name+"','"+address+"','"+no_of_residents+"','"+type+"')"                    
-                        var SQL1 = "SELECT society_name FROM society_details WHERE society_name=?";
+                        var SQL1 = `SELECT society_name FROM society_details WHERE society_name='${society_name}'`;
                         this.connection.query(SQL1, [society_name], (err, result) => __awaiter(this, void 0, void 0, function* () {
                             if (err)
                                 throw next(err);
@@ -37,7 +36,8 @@ class model_account {
                                 resolve(data);
                             }
                             else {
-                                this.connection.query(SQL1, (err, result) => __awaiter(this, void 0, void 0, function* () {
+                                var SQL = "INSERT INTO society_details(`society_name`,`address`,`no_of_residents`,`type`) VALUES('" + society_name + "','" + address + "','" + no_of_residents + "','" + type + "')";
+                                this.connection.query(SQL, (err, result) => __awaiter(this, void 0, void 0, function* () {
                                     if (err)
                                         throw next(err);
                                     if (result.affectedRows > 0) {
