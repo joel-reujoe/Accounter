@@ -61,8 +61,8 @@ class Master_Functions
                 connection.query(sql,async(err,result)=>{
                     if(err)next(err);
                     resolve(result);
-                    await dbservice.disconnectdb(connection);                                    
                 })
+                await dbservice.disconnectdb(connection);                                                    
             }catch(e){
                 next(e)
             }
