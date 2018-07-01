@@ -42,6 +42,7 @@
 <script src="../front-end-js/general.js"></script>
 <script>
     document.getElementById("login").addEventListener("click",function(event){
+        event.preventDefault();
         var params=new URLSearchParams();
         params.append("action","authenticate");
         params.append("email",document.getElementById("email").value);
@@ -57,5 +58,13 @@
         }).catch(function(error){
             console.log(error)
         })
+    })
+    document.getElementById("email").addEventListener("click",function(event){
+        event.preventDefault();
+        document.getElementById("span").innerHTML="";
+    })
+    document.getElementById("password").addEventListener("click",function(event){
+        event.preventDefault();
+        document.getElementById("span").innerHTML="";
     })
 </script>
