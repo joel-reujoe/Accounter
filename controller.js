@@ -29,7 +29,7 @@ app.get('/front-end-js/general.js',async(req,res)=>{
 app.get('/main.html',async(req,res,next)=>{
     res.sendFile(path.join(__dirname,'/pages/html/main.html'))
 })
-app.get('/addPage',async(req,res,next)=>{
+app.get('/addSociety',async(req,res,next)=>{
     res.setHeader('content-type','text/javascript')    
     res.sendFile(__dirname+'/pages/html/addPage.html')
 })
@@ -49,7 +49,7 @@ app.get('/viewBill',async(req,res,next)=>{
     res.setHeader('content-type','text/html');
     res.sendFile(path.join(__dirname,'/pages/html/viewBill.html'))
 })
-app.get('/viewPage',async(req,res,next)=>{
+app.get('/viewSociety',async(req,res,next)=>{
     res.setHeader('content-type','text/html');
     res.sendFile(path.join(__dirname,'/pages/html/viewPage.html'))
 })
