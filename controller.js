@@ -22,7 +22,7 @@ app.use(function (req, res, next) {
     next();
 });
 app.get('/login.html',async(req,res)=>{
-    res.setHeader('content-type','text/javascript')
+    res.setHeader('content-type','text/html')
     res.sendFile(__dirname+'/pages/html/login.html');
 })
 app.get('/front-end-js/general.js',async(req,res)=>{
@@ -33,7 +33,7 @@ app.get('/main.html',async(req,res,next)=>{
     res.sendFile(path.join(__dirname,'/pages/html/main.html'))
 })
 app.get('/addSociety',async(req,res,next)=>{
-    res.setHeader('content-type','text/javascript')    
+    res.setHeader('content-type','text/html')    
     res.sendFile(__dirname+'/pages/html/addPage.html')
 })
 app.get('/addResident',async(req,res,next)=>{
