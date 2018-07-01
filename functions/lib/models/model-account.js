@@ -31,7 +31,7 @@ class model_account {
                     try {
                         var connection = yield dbservice.connectdb();
                         var SQL1 = `SELECT society_name FROM society_details WHERE society_name='${society_name}'`;
-                        connection.query(SQL1, [society_name], (err, result) => __awaiter(this, void 0, void 0, function* () {
+                        connection.query(SQL1, (err, result) => __awaiter(this, void 0, void 0, function* () {
                             if (err)
                                 throw next(err);
                             if (result.length > 0) {
@@ -160,7 +160,7 @@ class model_account {
                                 console.log(result);
                                 var sql = "SELECT owner_name, society_name, flat_no,area FROM resident_details WHERE society_id=?";
                                 var result1 = yield Master_functions1.sqlProcess(sql, connection, next);
-                                if (result.length > 0) {
+                                if (result1.length > 0) {
                                     var data = { status: "true", message: result1 };
                                     resolve(data);
                                 }
@@ -173,7 +173,6 @@ class model_account {
                                 resolve({ status: false });
                             }
                         }));
-                        yield dbservice.disconnectdb(connection);
                     }
                     catch (e) {
                         reject(e);

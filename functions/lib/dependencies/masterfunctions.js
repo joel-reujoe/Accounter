@@ -60,7 +60,6 @@ Master_Functions.sqlProcess = (sql, connection, next) => __awaiter(this, void 0,
                 if (err)
                     next(err);
                 resolve(result);
-                yield dbservice.disconnectdb(connection);
             }));
         }
         catch (e) {
