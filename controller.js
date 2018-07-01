@@ -28,8 +28,29 @@ app.use(function (req, res, next) {
         next();
     });
 });
-app.get('/main.html',async(req,res,next)=>{
-    res.sendFile(path.join(__dirname,'/pages/html/main.html'))
+app.get('/front-end/general.js',async(req,res,next)=>{
+    res.sendFile(path.join(__dirname,'/front-end/general.js'))
+})
+app.get('/addPage',async(req,res,next)=>{
+    res.sendFile(path.join(__dirname,'/pages/html/addPage.html'))
+})
+app.get('/addResident',async(req,res,next)=>{
+    res.sendFile(path.join(__dirname,'/pages/html/addResident.html'))
+})
+app.get('/createBill',async(req,res,next)=>{
+    res.sendFile(path.join(__dirname,'/pages/html/createBill.html'))
+})
+app.get('/viewAll',async(req,res,next)=>{
+    res.sendFile(path.join(__dirname,'/pages/html/viewAll.html'))
+})
+app.get('/viewBill',async(req,res,next)=>{
+    res.sendFile(path.join(__dirname,'/pages/html/viewBill.html'))
+})
+app.get('/viewPage',async(req,res,next)=>{
+    res.sendFile(path.join(__dirname,'/pages/html/viewPage.html'))
+})
+app.get('/viewResident',async(req,res,next)=>{
+    res.sendFile(path.join(__dirname,'/pages/html/viewResident.html'))
 })
 var port=process.env.PORT||8000;
 app.use('/controller/ctrl-account', router_account);
