@@ -49,6 +49,7 @@ class model_account {
                                         resolve(data);
                                     }
                                 }));
+                                this.connection.end();
                             }
                         }));
                     }
@@ -72,6 +73,7 @@ class model_account {
                                 data = { status: "false", message: "No societies entered" };
                                 resolve(data);
                             }
+                            this.connection.end();
                         }));
                     }
                     catch (e) {
@@ -94,6 +96,7 @@ class model_account {
                                 data = { status: "false" };
                             }
                             resolve(data);
+                            this.connection.end();
                         }));
                     }
                     catch (e) {
@@ -132,6 +135,7 @@ class model_account {
                                 }
                             }));
                         }));
+                        this.connection.end();
                     }
                     catch (e) {
                         reject(e);
@@ -166,6 +170,7 @@ class model_account {
                                 resolve({ status: false });
                             }
                         }));
+                        this.connection.end();
                     }
                     catch (e) {
                         reject(e);
@@ -195,6 +200,7 @@ class model_account {
                                 resolve({ status: "false", message: "no result" });
                             }
                         }));
+                        this.connection.end();
                     }
                     catch (e) {
                         reject(e);
@@ -250,6 +256,7 @@ class model_account {
                                 }
                             }
                         }
+                        this.connection.end();
                     }
                     catch (e) {
                         reject(e);
@@ -280,6 +287,7 @@ class model_account {
                             var sendmsg = Master_functions1.formatSentResponse(processData, "true", "");
                             resolve(sendmsg);
                         }
+                        this.connection.end();
                     }
                     catch (e) {
                         next(e);
