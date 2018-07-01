@@ -29,7 +29,7 @@ app.use(function (req, res, next) {
     });
 });
 app.get('/main.html',async(req,res,next)=>{
-    res.sendFile(path.join(__dirname,'/pages/main.html'))
+    res.sendFile(path.join(__dirname,'/pages/html/main.html'))
 })
 var port=process.env.PORT||8000;
 app.use('/controller/ctrl-account', router_account);
