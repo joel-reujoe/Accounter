@@ -136,7 +136,6 @@ class model_account{
                         }
                     })
                 })
-                await dbservice.disconnectdb(connection);                
             }catch(e)
             {
                 reject(e);

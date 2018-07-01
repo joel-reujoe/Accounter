@@ -141,7 +141,6 @@ class model_account {
                                 }
                             }));
                         }));
-                        yield dbservice.disconnectdb(connection);
                     }
                     catch (e) {
                         reject(e);
