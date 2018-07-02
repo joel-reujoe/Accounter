@@ -13,6 +13,13 @@
      fieldset{
             width:500px;
         }
+        #get{
+            position: relative;
+            top:40px;
+            width: 300px;
+            background-color: blue;
+            color: white;
+        }
         #pdf{
             position: relative;
             top:40px;
@@ -40,7 +47,8 @@
             <th>Number of residents</th>           
         </table>
     </fieldset>
-    <button id="pdf">Create Pdf </button>
+    <button id="get">Get</button><p>
+    <button id="pdf">Create Pdf </button><p>
     <button id="excel" onclick="tableToExcel('details', 'W3C Example Table')">Create Excel</button>
 </body>
 </html>
@@ -54,40 +62,10 @@
     var society_name=[];
     var address=[];
     var no_of_residents=[];
-    var f=0;
-    
-    for(var i=0;i<size;i++)
-    {
-    if(localStorage.getItem("sname"+i)!=null)
-    {
-        society_name[i]=localStorage.getItem("sname"+i);
-      address[i]=localStorage.getItem("address"+i);
-      no_of_residents[i]=localStorage.getItem("nor"+i);
-      localStorage.removeItem("sname"+i);
-      localStorage.removeItem("address"+i);
-      localStorage.removeItem("nor"+i);  
-      var tr=document.createElement('tr');    
-      tr.innerHTML=`<td>
-                            ${society_name[i]}
-                        </td>
-                        <td>
-                            ${address[i]}
-                        </td>
-                        <td>
-                            ${no_of_residents[i]}
-                        </td>`
-    document.getElementById("details").appendChild(tr);
-    }
-    else{
-       f=1;
-       break;
-    }
-       
-    }
-    if(f==1)
-    {
         var params=new URLSearchParams();
         params.append("action","viewSociety");
+        document.getElementById("get").addEventListener("click",function(event){
+       
         axios.post(`${globalpath}controller/ctrl-account`,params).then(function(response){
             console.log(response.data.message);
             for(var i=0;i<response.data.message.length;i++)
@@ -107,8 +85,8 @@
             }
         }).catch(function(error){
             console.log(error);
-        })
-    }
+        })       
+    })
     </script>
 <script>
     var list=$("#details")
