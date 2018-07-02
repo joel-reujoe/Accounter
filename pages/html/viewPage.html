@@ -50,44 +50,6 @@
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="../front-end-js/general.js"></script>
 <script>
-    var list=$("#details")
-    var  a4 = [595.28, 841.89]; 
-    $(document).ready(function(){
-        $("#pdf").click(function(){
-            getCanvas().then(function(canvas){
-                var img = canvas.toDataURL("image/png"), 
-                doc = new jsPDF({  
-                     unit: 'px',  
-                     format: 'a4'  
-                 }); 
-                doc.addImage(img, 'JPEG', 20, 20);  
-                doc.save('list.pdf');  
-                list.width(cache_width); 
-            })
-        })
-    })
-    function getCanvas() {  
-            list.width((a4[0] * 1.33333) - 80).css('max-width', 'none');  
-            return html2canvas(list, {  
-                imageTimeout: 2000,  
-                removeContainer: true  
-            });  
-        }  
-</script>
-<script>
-    
-            var tableToExcel=(function(){
-            var uri = 'data:application/vnd.ms-excel;base64,'
-            ,template = '<html xmlns:o="urn:schemas-microsoft-com:office:excel" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>'
-            , base64 = function(s) { return window.btoa(unescape(encodeURIComponent(s))) }
-            , format = function(s, c) { return s.replace(/{(\w+)}/g, function(m, p) { return c[p]; }) }
-            return function(table, name) {
-    if (!table.nodeType) table = document.getElementById(table)
-    var ctx = {worksheet: name || 'Worksheet', table: table.innerHTML}
-    window.location.href = uri + base64(format(template, ctx))
-    }})()
-</script>
-<script>
     var size=localStorage.getItem("size");
     var society_name=[];
     var address=[];
@@ -148,3 +110,41 @@
         })
     }
     </script>
+<script>
+    var list=$("#details")
+    var  a4 = [595.28, 841.89]; 
+    $(document).ready(function(){
+        $("#pdf").click(function(){
+            getCanvas().then(function(canvas){
+                var img = canvas.toDataURL("image/png"), 
+                doc = new jsPDF({  
+                     unit: 'px',  
+                     format: 'a4'  
+                 }); 
+                doc.addImage(img, 'JPEG', 20, 20);  
+                doc.save('list.pdf');  
+                list.width(cache_width); 
+            })
+        })
+    })
+    function getCanvas() {  
+            list.width((a4[0] * 1.33333) - 80).css('max-width', 'none');  
+            return html2canvas(list, {  
+                imageTimeout: 2000,  
+                removeContainer: true  
+            });  
+        }  
+</script>
+<script>
+    
+            var tableToExcel=(function(){
+            var uri = 'data:application/vnd.ms-excel;base64,'
+            ,template = '<html xmlns:o="urn:schemas-microsoft-com:office:excel" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>'
+            , base64 = function(s) { return window.btoa(unescape(encodeURIComponent(s))) }
+            , format = function(s, c) { return s.replace(/{(\w+)}/g, function(m, p) { return c[p]; }) }
+            return function(table, name) {
+    if (!table.nodeType) table = document.getElementById(table)
+    var ctx = {worksheet: name || 'Worksheet', table: table.innerHTML}
+    window.location.href = uri + base64(format(template, ctx))
+    }})()
+</script>
