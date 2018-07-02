@@ -94,7 +94,7 @@ $(document).ready( function() {
 });
 $(document).ready( function() {
     $("#createBill").on("click", function() {
-        axios.get(`${globalpath}createBill`).then(function(response){
+        axios.get(`${globalpath1}createBill`).then(function(response){
             $('#content').html(response.data)
         }).catch(function(error){
             console.log(error);
