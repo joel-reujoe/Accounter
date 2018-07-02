@@ -47,7 +47,7 @@
         params.append("action","authenticate");
         params.append("email",document.getElementById("email").value);
         params.append("password",document.getElementById("password").value);
-        axios.post(`${globalpath1}controller/ctrl-account`,params).then(function(response){
+        axios.post(`${globalpath}controller/ctrl-account`,params).then(function(response){
             if(response.data.status==true)
             {
                 window.location="https://accounter-md1.herokuapp.com/main.html"
