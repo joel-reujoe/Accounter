@@ -272,7 +272,7 @@ class model_account{
             return new Promise(async(resolve,reject)=>{
                 try{
                     var connection=await dbservice.connectdb();
-                    var sql=`SELECT email FROM signin WHERE email='${email}' AND passsword='${password}'`;
+                    var sql=`SELECT email FROM signin WHERE email='${email}' AND password='${password}'`;
                     console.log(sql);
                     var result=await Master_functions1.sqlProcess(sql,connection,dbservice,next);
                     if(result.length>0)

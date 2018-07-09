@@ -269,7 +269,7 @@ class model_account {
                 return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
                     try {
                         var connection = yield dbservice.connectdb();
-                        var sql = `SELECT email FROM signin WHERE email='${email}' AND passsword='${password}'`;
+                        var sql = `SELECT email FROM signin WHERE email='${email}' AND password='${password}'`;
                         console.log(sql);
                         var result = yield Master_functions1.sqlProcess(sql, connection, dbservice, next);
                         if (result.length > 0) {
