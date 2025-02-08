@@ -96,7 +96,7 @@
     })
     var params=new URLSearchParams();
     params.append("action","getSociety");
-    axios.post(`${globalpath}controller/ctrl-account`,params).then(function(response){
+    axios.post(`${globalpath1}controller/ctrl-account`,params).then(function(response){
         console.log(response);
         for(var i=0;i<response.data.message.length;i++)
         {
@@ -116,7 +116,7 @@
         params.append("option",document.getElementById("option").value);
         params.append("area",document.getElementById("area").value); 
         params.append("unit",document.getElementById("unit").value);
-        axios.post(`${globalpath}controller/ctrl-account`,params).then(function(response){
+        axios.post(`${globalpath1}controller/ctrl-account`,params).then(function(response){
             if(response.data.status=="fail")
             {
                 document.getElementById("n").style.color='red'

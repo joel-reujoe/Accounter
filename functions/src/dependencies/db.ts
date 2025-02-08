@@ -9,10 +9,10 @@ interface mysqlConnection{
 class dbconnect implements mysqlConnection{
      host;user;password;database;
      constructor() {
-        this.host = 'sql12.freemysqlhosting.net';
-        this.user = `sql12246739`;
-        this.password = `xRIAYMLPYL`;
-        this.database = `sql12246739`;
+        this.host = 'localhost';
+        this.user = `postgres`;
+        this.password = `password`;
+        this.database = `admin`;
         // this.init();
       }
       private async init() {

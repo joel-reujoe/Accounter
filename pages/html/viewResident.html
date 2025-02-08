@@ -95,7 +95,7 @@ window.location.href = uri + base64(format(template, ctx))
 <script>
     var params=new URLSearchParams();
     params.append("action","getSociety")
-    axios.post(`${globalpath}controller/ctrl-account`,params).then(function(response){
+    axios.post(`${globalpath1}controller/ctrl-account`,params).then(function(response){
         for(var i=0;i<response.data.message.length;i++)
         {
             var option=document.createElement('option');
@@ -113,7 +113,7 @@ window.location.href = uri + base64(format(template, ctx))
         var params=new URLSearchParams();
         params.append("action","viewResident")
         params.append("name",document.getElementById("option").value);
-        axios.post(`${globalpath}controller/ctrl-account`,params).then(function(response){
+        axios.post(`${globalpath1}controller/ctrl-account`,params).then(function(response){
             if(response.data.status=="false")
             {
                 document.getElementById("details").innerHTML=""

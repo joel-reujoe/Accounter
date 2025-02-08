@@ -121,7 +121,7 @@
         params.append("from",document.getElementById("from").value);
         params.append("to",document.getElementById("to").value);  
         params.append("due",document.getElementById("due").value);              
-        axios.post(`${globalpath}controller/ctrl-account`,params).then(function(response){
+        axios.post(`${globalpath1}controller/ctrl-account`,params).then(function(response){
             console.log(response);
         }).catch(function(error){
             console.log(error)
@@ -140,7 +140,7 @@
     })
     var params=new URLSearchParams();
     params.append("action","getSociety");
-    axios.post(`${globalpath}controller/ctrl-account`,params).then(function(response){
+    axios.post(`${globalpath1}controller/ctrl-account`,params).then(function(response){
         for(var i=0;i<response.data.message.length;i++)
         {
                     var option=document.createElement('option');
@@ -164,7 +164,7 @@
         var params=new URLSearchParams();
         params.append("action","getResident");
         params.append("society_name",document.getElementById("option").value);
-        axios.post(`${globalpath}controller/ctrl-account`,params).then(function(response){
+        axios.post(`${globalpath1}controller/ctrl-account`,params).then(function(response){
             console.log(response);
             document.getElementById("resident").innerHTML="";
             for(var i=0;i<response.data.message.length;i++)

@@ -10,10 +10,10 @@ var sql = require('mysql');
 ;
 class dbconnect {
     constructor() {
-        this.host = 'sql12.freemysqlhosting.net';
-        this.user = `sql12246739`;
-        this.password = `xRIAYMLPYL`;
-        this.database = `sql12246739`;
+        this.host = 'localhost';
+        this.user = `mysql`;
+        this.password = `password`;
+        this.database = `admin`;
         // this.init();
     }
     init() {

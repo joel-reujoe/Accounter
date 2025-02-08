@@ -95,7 +95,7 @@
         params.append("nor",document.getElementById("nor").value);
         params.append("type",document.getElementById("type").value);
         console.log(params);
-       axios.post(`${globalpath}controller/ctrl-account`,params).then(function(response){
+       axios.post(`${globalpath1}controller/ctrl-account`,params).then(function(response){
            console.log(response);
            if(response.data.status=="fail")
            {
@@ -117,7 +117,7 @@
            event.preventDefault();
             var params=new URLSearchParams();
             params.append("action","viewSociety");
-            axios.post(`${globalpath}controller/ctrl-account`,params).then(function(response){
+            axios.post(`${globalpath1}controller/ctrl-account`,params).then(function(response){
                 localStorage.setItem("size",response.data.message.length);
                 for(var i=0;i<response.data.message.length;i++)
                 {
