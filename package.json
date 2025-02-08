@@ -7,11 +7,11 @@
     "lib": "lib"
   },
   "dependencies": {
-    "express": "^4.16.3",
-    "firebase": "^5.1.0",
-    "moment-timezone": "^0.5.17",
-    "mysql": "^2.15.0",
-    "pg": "^7.4.3"
+    "express": "^4.21.2",
+    "firebase": "^11.3.0",
+    "moment-timezone": "^0.5.47",
+    "mysql": "^2.18.1",
+    "pg": "^8.13.1"
   },
   "engines": {
     "node": "8.9.0",
@@ -21,7 +21,6 @@
     "type": "git",
     "url": "https://github.com/joel-reujoe/accounter.git"
   },
-  "devDependencies": {},
   "scripts": {
     "start": "node controller.js"
   },
