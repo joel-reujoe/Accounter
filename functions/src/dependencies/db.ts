@@ -10,7 +10,7 @@ class dbconnect implements mysqlConnection{
      host;user;password;database;
      constructor() {
         this.host = 'localhost';
-        this.user = `postgres`;
+        this.user = `mysql`;
         this.password = `password`;
         this.database = `admin`;
         // this.init();

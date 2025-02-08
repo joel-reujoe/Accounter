@@ -1,7 +1,7 @@
 const moment = require('moment-timezone');
 const moment1 = require('moment');
 moment().tz('Asia/Kolkata');
-var ctrl_account=require('../controllers/ctrl-account.js');
+const ctrl_account=require('../controllers/ctrl-account.js');
 class switch_router
 {
     public hrtime;mydatetimestamp;

@@ -40,7 +40,7 @@ class ctrl_account{
             else{
                 var model_account_object=new model_account(req.connection);   
                 console.log(society_name,address,no_of_residents);         
-                var data=await model_account_object.model_functions.addSociety(req,society_name,address,no_of_residents,type,next);
+                data=await model_account_object.model_functions.addSociety(req,society_name,address,no_of_residents,type,next);
                 return data;
             }
            
